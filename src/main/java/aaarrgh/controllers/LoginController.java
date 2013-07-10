@@ -15,13 +15,13 @@ public class LoginController {
 
 	@RequestMapping("/auth")
 	public ModelAndView authenticate(
-			@RequestParam("username") String username,
+			@RequestParam("user") String user,
 			@RequestParam("password") String password) {
 
 		ModelAndView dispatch = null;
 
-		if (loginService.authenticate(username, password)) {
-			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + username); 
+		if (loginService.authenticate(user, password)) {
+			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + user); 
 		} else {
 			dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
 		}
