@@ -104,8 +104,8 @@ public class TweetDaoJdbcImpl implements TweetDao{
 	}
 
 	@Override
-	public Tweet findById(Integer id_tweet) throws PersistenceException {
-		if (id_tweet == null) {
+	public Tweet findById(Integer id_user) throws PersistenceException {
+		if (id_user == null) {
 			throw new IllegalArgumentException(
 					"El id del tweet no debe ser nulo");
 		}
@@ -114,7 +114,7 @@ public class TweetDaoJdbcImpl implements TweetDao{
 			Connection c = ConnectionProvider.getInstance().getConnection();
 			String query = "select * from tweet where id_user = ?";
 			PreparedStatement statement = c.prepareStatement(query);
-			statement.setInt(1, id_tweet);
+			statement.setInt(1, id_user);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				tweet = convertOne(resultSet);
