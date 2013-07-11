@@ -93,5 +93,20 @@ public class TweetDaoTests {
 		assertEquals("se espera que haya 2 tweets en la base", 2, todosLosTweets.size());
 
 	}
+	
+		@Test
+	public void testQueSePuedeBuscarTodosLosTweetsDeCiertoUsuario() throws PersistenceException {
+
+		Integer idUser = 1;
+		tweetdos = buildTweet(2, "Mi segundo tweet",1);
+		dao.insert(tweetdos);
+
+		List<Tweet> todosLosTweetsdeSparrow = dao.findAllFromUser(idUser);
+		
+		assertEquals("Los tweets deberian ser dos", 2, (int)todosLosTweetsdeSparrow.size());
+
+		assertEquals("El tweet 2 es: mi segundo tweet", "Mi segundo tweet", todosLosTweetsdeSparrow.select(2).getTweet();
+		assertEquals("El tweet 2 pertence al usuario: Sparrows", 1, (int)todosLosTweetsdeSparrow.select(2).getId_user());//modificar
+	}
 
 }
