@@ -38,18 +38,17 @@ public class LoginControllerTests {
 		Assert.assertEquals("Ingreso incorrecto", modelAndView.getModel().get("message"));
 
 	}
-	
+	//Incompleto
 	@Test
 	public void queSePuedaHacerLogout() throws Exception {
 
 		LoginController controller = new LoginController();
-		ModelAndView modelAndView = controller.authenticate("jack", "jack");
-		
-		
+
 		ModelAndView modelAndView = controller.logout();
-		
+
 		Assert.assertEquals("../../index", modelAndView.getViewName());
-		Assert.assertEquals("Logout exitoso.", modelAndView.getModel().get("message"));
+		Assert.assertEquals("Logout exitoso.",
+				modelAndView.getModel().get("message"));
 
 	}
 

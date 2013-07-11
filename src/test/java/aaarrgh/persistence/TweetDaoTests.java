@@ -12,42 +12,41 @@ import org.junit.Test;
 
 import aaarrgh.model.Tweet;
 
-
 public class TweetDaoTests {
 	TweetDao dao = DaoFactory.getTweetDao();
 
 	Tweet tweetuno;
+	Tweet tweetdos;
 
 	@Before
 	public void setUp() throws PersistenceException {
-		// se borran todas las personas, para iniciar con base vacía
-		for (Tweet cadaTweet: dao.findAll()) {
+		// se borran todos los tweets, para iniciar con base vacía
+		for (Tweet cadaTweet : dao.findAll()) {
 			dao.delete(cadaTweet);
 		}
 
-		// se inserta
-		tweetuno = buildTweet(1, "Mi primer tweet",1);
+		// se insertan 3 tweets:
+		tweetuno = buildTweet(1, "Mi primer tweet", 1);
 		dao.insert(tweetuno);
+		tweetdos = buildTweet(2, "Mi segundo tweet", 1);
+		dao.insert(tweetdos);
 
-	
 	}
 
-	private Tweet buildTweet(Integer id_user, String tweets, Integer Id_user) {
+	private Tweet buildTweet(Integer iduser, String tweets, Integer Iduser) {
 		Tweet tweet = new Tweet();
-		tweet.setId(id_user);
+		tweet.setId(iduser);
 		tweet.setTweet(tweets);
-		tweet.setId_user(id_user);
-		
+		tweet.setIduser(iduser);
 
 		return tweet;
 	}
 
+	// Borro los tweets
 	@After
 	public void tearDown() throws PersistenceException {
-		// se borran todas las personas
-
 		dao.delete(tweetuno);
-	
+		dao.delete(tweetdos);
 
 	}
 
@@ -57,56 +56,64 @@ public class TweetDaoTests {
 		Tweet tweetEncontrado = dao.findById(tweetuno.getId());
 
 		assertNotNull("El tweet con id 1 debe existir", tweetEncontrado);
-		assertEquals("El tweet 1 es: mi primer tweet", "mi primer tweet", tweetEncontrado.getTweet());
-		assertEquals("El tweet 1 pertence al usuario: Sparrows", 1, (int)tweetEncontrado.getId_user());//modificar
+		assertEquals("El tweet 1 es: mi primer tweet", "mi primer tweet",
+				tweetEncontrado.getTweet());
+		assertEquals("El tweet 1 pertence al usuario: Sparrows", 1,
+				(int) tweetEncontrado.getIduser());// modificar
 	}
 
 	@Test
 	public void testQueSePuedeInsertarUnTweet() throws PersistenceException {
 
-		Tweet tweetdos = buildTweet(2, "Mi segundo tweet",1);
-		assertEquals("antes de insertar hay 1 tweet", 1, dao.findAll().size());
+		Tweet tweettres = buildTweet(3, "Mi tercer tweet", 1);
+		assertEquals("antes de insertar hay 2 tweet", 2, dao.findAll().size());
 
-		dao.insert(tweetdos);
-		assertEquals("luego de insertar hay 2 tweet", 2, dao.findAll().size());
-		assertNotNull("puede encontrarse al tweet con id 2", dao.findById(tweetdos.getId()));
+		dao.insert(tweettres);
+		assertEquals("luego de insertar hay 3 tweet", 3, dao.findAll().size());
+		assertNotNull("puede encontrarse al tweet con id 3",
+				dao.findById(tweettres.getId()));
 
 	}
 
 	@Test
 	public void testQueSePuedeBorrarUnTweet() throws PersistenceException {
 
-		Tweet tweetEncontrado = dao.findById(tweetuno.getId());
+		Tweet tweetEncontrado = dao.findById(tweetdos.getId());
 		dao.delete(tweetEncontrado);
 
-		tweetEncontrado = dao.findById(1);
-		assertNull("El tweet con id 1 no debe existir", tweetEncontrado);
+		tweetEncontrado = dao.findById(2);
+		assertNull("El tweet con id 2 no debe existir", tweetEncontrado);
 
 	}
 
-	
-//Modificar la cantidad de tweets que hay en la base
 	@Test
-	public void testQueSePuedenBuscarTodosLosTweets() throws PersistenceException {
+	public void testQueSePuedenBuscarTodosLosTweets()
+			throws PersistenceException {
 
 		List<Tweet> todosLosTweets = dao.findAll();
-		assertEquals("se espera que haya 2 tweets en la base", 2, todosLosTweets.size());
+		assertEquals("se espera que haya 2 tweets en la base", 2,
+				todosLosTweets.size());
 
 	}
-	
-		@Test
-	public void testQueSePuedeBuscarTodosLosTweetsDeCiertoUsuario() throws PersistenceException {
 
-		Integer idUser = 1;
-		tweetdos = buildTweet(2, "Mi segundo tweet",1);
-		dao.insert(tweetdos);
+	@Test
+	public void testQueSePuedeBuscarTodosLosTweetsDeCiertoUsuario()
+			throws PersistenceException {
 
-		List<Tweet> todosLosTweetsdeSparrow = dao.findAllFromUser(idUser);
-		
-		assertEquals("Los tweets deberian ser dos", 2, (int)todosLosTweetsdeSparrow.size());
+		Integer iduser = 1;
+		Tweet tweetcuatro = buildTweet(4, "Mi cuarto tweet", 1);
+		dao.insert(tweetcuatro);
 
-		assertEquals("El tweet 2 es: mi segundo tweet", "Mi segundo tweet", todosLosTweetsdeSparrow.select(2).getTweet();
-		assertEquals("El tweet 2 pertence al usuario: Sparrows", 1, (int)todosLosTweetsdeSparrow.select(2).getId_user());//modificar
+		List<Tweet> todosLosTweetsdeSparrow = dao.findAllFromUser(iduser);
+
+		assertEquals("Los tweets deberian ser tres", 3,
+				(int) todosLosTweetsdeSparrow.size());
+
+		assertEquals(
+				"El tweet 4 es: mi tercer tweet - Anteriormente elimine uno",
+				"Mi cuarto tweet", todosLosTweetsdeSparrow.select(3).getTweet());
+		assertEquals("El tweet 4 pertence al usuario: Sparrows", 1,
+				(int) todosLosTweetsdeSparrow.select(3).getIduser());
 	}
 
 }

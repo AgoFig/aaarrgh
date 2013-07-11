@@ -22,12 +22,12 @@ public class TweetDaoJdbcImpl implements TweetDao{
 
 		try {
 			tx.begin();
-			String query = "insert into tweet (id_tweet, tweets, id_user) values (?,?,?)";
+			String query = "insert into tweet (idtweet, tweets, iduser) values (?,?,?)";
 			PreparedStatement statement = TransactionJdbcImpl.getInstance()
 					.getConnection().prepareStatement(query);
 			statement.setInt(1, tweet.getId());
 			statement.setString(2, tweet.getTweet());
-			statement.setInt(3, tweet.getId_user());//verificar 
+			statement.setInt(3, tweet.getIduser());
 				
 			
 			statement.executeUpdate();
@@ -53,7 +53,7 @@ public class TweetDaoJdbcImpl implements TweetDao{
 		try {
 			tx.begin();
 
-			String query = "delete from tweet where id_tweet = ?";
+			String query = "delete from tweet where idtweet = ?";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, tweet.getId());
 			statement.executeUpdate();
@@ -74,12 +74,12 @@ public class TweetDaoJdbcImpl implements TweetDao{
 	@Override
 	public void update(Tweet tweet) throws PersistenceException {
 		try {
-			String query = "update tweet set tweets = ?, id_user = ?, where id_tweet = ?";
+			String query = "update tweet set tweets = ?, iduser = ?, where idtweet = ?";
 
 			PreparedStatement statement = TransactionJdbcImpl.getInstance()
 					.getConnection().prepareStatement(query);
 			statement.setString(1, tweet.getTweet());
-			statement.setInt(2,tweet.getId_user());//verificar
+			statement.setInt(2,tweet.getIduser());
 			statement.setInt(3, tweet.getId());
 			statement.executeUpdate();
 		} catch (SQLException sqlException) {
@@ -104,17 +104,17 @@ public class TweetDaoJdbcImpl implements TweetDao{
 	}
 
 	@Override
-	public Tweet findById(Integer id_user) throws PersistenceException {
-		if (id_user == null) {
+	public Tweet findById(Integer iduser) throws PersistenceException {
+		if (iduser == null) {
 			throw new IllegalArgumentException(
 					"El id del tweet no debe ser nulo");
 		}
 		Tweet tweet = null;
 		try {
 			Connection c = ConnectionProvider.getInstance().getConnection();
-			String query = "select * from tweet where id_user = ?";
+			String query = "select * from tweet where iduser = ?";
 			PreparedStatement statement = c.prepareStatement(query);
-			statement.setInt(1, id_user);
+			statement.setInt(1, iduser);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				tweet = convertOne(resultSet);
@@ -128,11 +128,17 @@ public class TweetDaoJdbcImpl implements TweetDao{
 	private Tweet convertOne(ResultSet resultSet) throws SQLException {
 		Tweet retorno = new Tweet();
 
-		retorno.setId(resultSet.getInt("id_tweet"));
+		retorno.setId(resultSet.getInt("idtweet"));
 		retorno.setTweet(resultSet.getString("tweets"));
-		retorno.setId_user(resultSet.getInt("id_user"));
+		retorno.setIduser(resultSet.getInt("iduser"));
 
 		return retorno;
+	}
+	@Override
+	public List<Tweet> findAllFromUser(Integer iduser)
+			throws PersistenceException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

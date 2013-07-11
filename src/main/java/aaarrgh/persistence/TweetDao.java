@@ -13,8 +13,11 @@ public interface TweetDao {
     
     public void update(Tweet tweet) throws PersistenceException;
     
-    public Tweet findById(Integer id_tweet) throws PersistenceException;
+    public Tweet findById(Integer idtweet) throws PersistenceException;
     
     public List<Tweet> findAll() throws PersistenceException;
+
+	public List<Tweet> findAllFromUser(Integer iduser) throws PersistenceException;
+
     
 }

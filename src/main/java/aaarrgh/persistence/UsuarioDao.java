@@ -12,7 +12,7 @@ public interface UsuarioDao {
     
     public void update(Usuario usuario) throws PersistenceException;
     
-    public Usuario findById(Integer idPersona) throws PersistenceException;
+    public Usuario findById(Integer iduser) throws PersistenceException;
     
     public List<Usuario> findAll() throws PersistenceException;
     

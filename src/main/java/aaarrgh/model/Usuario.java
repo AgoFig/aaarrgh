@@ -2,12 +2,12 @@ package aaarrgh.model;
 
 public class Usuario {
 
-	private Integer id_user;
+	private Integer iduser;
 	private String nombre;
 	private String apellido;
 	private String mail;
 	private String user;
-	private Integer password;
+	private String password;
 
 	public Usuario() {
 		super();
@@ -18,10 +18,10 @@ public class Usuario {
 	}
 	
 	public Integer getId() {
-		return id_user;
+		return iduser;
 	}
-	public void setId(Integer id_user) {
-		this.id_user = id_user;
+	public void setId(Integer iduser) {
+		this.iduser = iduser;
 	}
 	public String getNombre() {
 		return nombre;
@@ -47,10 +47,10 @@ public class Usuario {
 	public void setUser(String user) {
 		this.user = user;
 	}
-	public Integer getPassword() {
+	public String getPassword() {
 		return password;
 	}
-	public void setPassword(Integer password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 	

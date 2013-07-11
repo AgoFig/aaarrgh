@@ -30,4 +30,9 @@ public class LoginController {
 
 	}
 
+	public ModelAndView logout() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
