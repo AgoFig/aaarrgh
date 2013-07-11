@@ -7,6 +7,21 @@
 <title>Bienvenido</title>
 </head>
 <body>
+<div class="header" ><h1>Aaarrgh</h1><h3>Version 2.0</h3></div>
 	<p>${message}</p>
+	<div>
+		<form action="tweet/postear.do>
+			<input type="text" value="Que hay de nuevo marinero?" />
+			<input type="submit" class="btn" />
+		</form>
+	</div>
+	<div class="barra-lateral" >
+		<a href="usuario/perfil.do">Mi Perfil</a>
+		<a href="usuario/perfil.do">A quienes sigo</a>
+		<a href="usuario/perfil.do">Mis seguidores</a>
+	</div>
+	<div class="lista-feed">
+	${listadoTweet}
+	</div>
 </body>
 </html>
