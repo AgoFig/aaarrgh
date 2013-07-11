@@ -4,7 +4,7 @@
 # sigue (seguidor, seguido)                             #
 
 create table usuario (
-	id_user int not null,
+	iduser int not null,
 	user varchar(255) null,
 	pass varchar(255) null,
 	nombre varchar(255) null,
