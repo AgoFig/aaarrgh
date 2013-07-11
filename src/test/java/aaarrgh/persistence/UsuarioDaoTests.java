@@ -116,9 +116,11 @@ capitanBarbosa= buildUsuario(2, "Capitan", "Barbosa", "cap@barbosa.com","@barb",
 
 jackSparrow.seguir(capitanBarbosa);
 
-<List> seguidores = jackSparrow.getSigue();
+<List> genteAQuienJackSigue = jackSparrow.getSigue();
 
-		assertEquals("Jack debe estar siguiendo a un usuario llamado Barbosa", 1, seguidores.size());
+<List> tweetsDeGenteAQuienJackSigue = dao.traerTweetsDeQuienesSigo(jackSparrow.get_Id());
+
+		assertEquals("Jack debe estar siguiendo a un usuario llamado Barbosa", 1, genteAQuienJackSigue.size());
 
 	}
 
@@ -134,6 +136,22 @@ jackSparrow.seguir(capitanBarbosa);
 <List> seguidores = capitanBarbosa.getSeguidores();
 
 		assertEquals("Barbosa debe estar siendo seguido por un usuario que es Jack", 1, seguidores.size());
+
+	}
+	
+	@Test
+	public void testQueSePuedaDejarDeSeguirAUnUser() throws PersistenceException {
+
+		Usuario capitanBarbosa;
+		capitanBarbosa= buildUsuario(2, "Capitan", "Barbosa", "cap@barbosa.com","@barb",1234);
+		dao.insert(capitanBarbosa);
+
+		jackSparrow.seguir(capitanBarbosa);
+		jackSparrow.dejarDeSeguir(capitanBarbosa);
+
+<List> seguidores = capitanBarbosa.getSeguidores();
+
+		assertEquals("Barbosa no deberia estar siguiendo a nadie.", 0, seguidores.size());
 
 	}
 
