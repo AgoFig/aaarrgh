@@ -24,15 +24,15 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 
 		try {
 			tx.begin();
-			String query = "insert into usuario (iduser, nombre, apellido, mail,user,password) values (?, ?, ?, ?,?,?)";
+			String query = "insert into usuario (id_user, user, password, nombre,apellido,mail) values (?, ?, ?, ?,?,?)";
 			PreparedStatement statement = TransactionJdbcImpl.getInstance()
 					.getConnection().prepareStatement(query);
 			statement.setInt(1, usuario.getId());
-			statement.setString(2, usuario.getNombre());
-			statement.setString(3, usuario.getApellido());
-			statement.setString(4, usuario.getMail());
-			statement.setString(5,usuario.getUser());
-			statement.setString(6,usuario.getPassword());	
+			statement.setString(2, usuario.getUser());
+			statement.setString(3, usuario.getPassword());
+			statement.setString(4, usuario.getNombre());
+			statement.setString(5,usuario.getApellido());
+			statement.setString(6,usuario.getMail());	
 			
 			
 
@@ -59,7 +59,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		try {
 			tx.begin();
 
-			String query = "delete from usuario where iduser = ?";
+			String query = "delete from usuario where id_user = ?";
 			PreparedStatement statement = conn.prepareStatement(query);
 			statement.setInt(1, usuario.getId());
 			statement.executeUpdate();
@@ -80,15 +80,15 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 	@Override
 	public void update(Usuario usuario) throws PersistenceException {
 		try {
-			String query = "update usuario set nombre = ?, apellido = ?, mail = ?, user=?,password=?, where iduser = ?";
+			String query = "update usuario set user = ?, password = ?,  nombre= ?, apellido=?,mail=? where id_user = ?";
 
 			PreparedStatement statement = TransactionJdbcImpl.getInstance()
 					.getConnection().prepareStatement(query);
-			statement.setString(1, usuario.getNombre());
-			statement.setString(2, usuario.getApellido());
-			statement.setString(3, usuario.getMail());
-			statement.setString(4,usuario.getUser());
-			statement.setString(5,usuario.getPassword());
+			statement.setString(1, usuario.getUser());
+			statement.setString(2, usuario.getPassword());
+			statement.setString(3, usuario.getNombre());
+			statement.setString(4,usuario.getApellido());
+			statement.setString(5,usuario.getMail());
 			statement.setInt(6, usuario.getId());
 			statement.executeUpdate();
 		} catch (SQLException sqlException) {
@@ -121,7 +121,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		Usuario usuario = null;
 		try {
 			Connection c = ConnectionProvider.getInstance().getConnection();
-			String query = "select * from usuario where iduser = ?";
+			String query = "select * from usuario where id_user = ?";
 			PreparedStatement statement = c.prepareStatement(query);
 			statement.setInt(1, iduser);
 			ResultSet resultSet = statement.executeQuery();
@@ -137,7 +137,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 	private Usuario convertOne(ResultSet resultSet) throws SQLException {
 		Usuario retorno = new Usuario();
 
-		retorno.setId(resultSet.getInt("iduser"));
+		retorno.setId(resultSet.getInt("id_user"));
 		retorno.setNombre(resultSet.getString("nombre"));
 		retorno.setApellido(resultSet.getString("apellido"));
 		retorno.setMail(resultSet.getString("mail"));

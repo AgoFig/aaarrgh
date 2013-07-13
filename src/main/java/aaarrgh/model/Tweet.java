@@ -2,7 +2,7 @@ package aaarrgh.model;
 
 public class Tweet {
 	private Integer idtweet;
-	private String tweets;
+	private String tweet;
 	private Integer iduser;
 
 	public Tweet() {
@@ -18,11 +18,11 @@ public class Tweet {
 	}
 
 	public String getTweet() {
-		return tweets;
+		return tweet;
 	}
 
-	public void setTweet(String tweets) {
-		this.tweets = tweets;
+	public void setTweet(String tweet) {
+		this.tweet = tweet;
 	}
 
 	public Integer getIduser() {

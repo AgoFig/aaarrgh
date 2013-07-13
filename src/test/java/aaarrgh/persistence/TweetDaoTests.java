@@ -56,7 +56,7 @@ public class TweetDaoTests {
 		Tweet tweetEncontrado = dao.findById(tweetuno.getId());
 
 		assertNotNull("El tweet con id 1 debe existir", tweetEncontrado);
-		assertEquals("El tweet 1 es: mi primer tweet", "mi primer tweet",
+		assertEquals("El tweet 1 es: mi primer tweet", "Mi primer tweet",
 				tweetEncontrado.getTweet());
 		assertEquals("El tweet 1 pertence al usuario: Sparrows", 1,
 				(int) tweetEncontrado.getIduser());// modificar
