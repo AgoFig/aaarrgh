@@ -5,12 +5,17 @@
 <html>
 <head>
 <title>Bienvenido</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-<div class="header" ><h1>Aaarrgh</h1><h3>Version 2.0</h3></div>
+	<div class="header">
+		<h1>Aaarrgh</h1>
+		<h3>Version 2.0</h3>
+	</div>
 	<p>${message}</p>
 	<div>
-		<form action="tweet/postear.do>
+		<form
+			action="tweet/postear.do" >
 			<input type="text" value="Que hay de nuevo marinero?" />
 			<input type="submit" class="btn" />
 		</form>

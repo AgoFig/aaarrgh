@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
+import aaarrgh.model.Tweet;
 import aaarrgh.model.Usuario;
 public class UsuarioDaoJdbcImpl implements UsuarioDao {
 
@@ -143,6 +144,12 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		retorno.setMail(resultSet.getString("mail"));
 
 		return retorno;
+	}
+
+	@Override
+	public List<Tweet> traerTweetsDeQuienesSigo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

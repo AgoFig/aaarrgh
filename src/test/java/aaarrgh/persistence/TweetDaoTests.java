@@ -111,9 +111,9 @@ public class TweetDaoTests {
 
 		assertEquals(
 				"El tweet 4 es: mi tercer tweet - Anteriormente elimine uno",
-				"Mi cuarto tweet", todosLosTweetsdeSparrow.select(3).getTweet());
+				"Mi cuarto tweet", ((Object) todosLosTweetsdeSparrow).select(3).getTweet());
 		assertEquals("El tweet 4 pertence al usuario: Sparrows", 1,
-				(int) todosLosTweetsdeSparrow.select(3).getIduser());
+				(int) ((Object) todosLosTweetsdeSparrow).select(3).getIduser());
 	}
 
 }

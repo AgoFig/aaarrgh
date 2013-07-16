@@ -1,0 +1,78 @@
+@CHARSET "ISO-8859-1";
+
+/****************
+     Globales
+****************/
+.float-left {
+	float: left;
+}
+
+.clear {
+	clear: both;
+}
+
+.grid50 {
+	width: 50%;
+}
+
+.negro {
+	background-color: black
+}
+
+.naranja {
+	background-color: #B3431D
+}
+
+.rojo {
+	background-color: #B80A01
+}
+
+.blanco {
+	background-color: white
+}
+
+.gris {
+	background-color: #5C595C
+}
+
+/****************
+    Contenido
+****************/
+body {
+	background-image: url(../img/bg-body.jpg);
+	margin: 0;
+	padding: 0;
+	font-family: Arial, helvetica;
+}
+
+.container {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.pirata {
+	text-align: center;
+}
+
+.barra-top {
+	width: 960px;
+	height: 30px;
+}
+
+.color {
+	width: 20%;
+	height: 15px;
+	float: left;
+}
+
+.login form {
+	padding-top: 100px;
+	width: 250px;
+	margin: 0 auto;
+}
+
+.footer {
+	text-align: center;
+	color: #3f3b35;
+	font-size: 0.8em;
+}

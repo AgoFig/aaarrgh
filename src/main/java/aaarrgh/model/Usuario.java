@@ -1,5 +1,7 @@
 package aaarrgh.model;
 
+import java.util.List;
+
 public class Usuario {
 
 	private Integer iduser;
@@ -52,6 +54,26 @@ public class Usuario {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void seguir(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<Usuario> getSigue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Usuario> getSeguidores() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void dejarDeSeguir(Usuario capitanBarbosa) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

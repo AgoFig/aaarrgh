@@ -10,13 +10,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import aaarrgh.model.Tweet;
 import aaarrgh.model.Usuario;
 
 public class UsuarioDaoTests {
 
 	UsuarioDao dao = DaoFactory.getUsuarioDao();
 
-	Usuario jackSparrows;
+	Usuario jackSparrow;
 	Usuario capitanBarbosa;
 	
 	@Before
@@ -27,8 +28,8 @@ public class UsuarioDaoTests {
 		}
 
 		// se insertan:
-		jackSparrows=buildUsuario(1,"jacksparrows","jack","Jack","Sparrows","jack@sparrows.com");
-		dao.insert(jackSparrows);
+		jackSparrow=buildUsuario(1,"jacksparrows","jack","Jack","Sparrows","jack@sparrows.com");
+		dao.insert(jackSparrow);
 
 		capitanBarbosa = buildUsuario(2, "capitanbarbosa", "barbosa","Capitan","Barbosa",
 				"cap@barbosa.com");
@@ -55,7 +56,7 @@ public class UsuarioDaoTests {
 	public void tearDown() throws PersistenceException {
 		// se borra todos los usuarios
 
-		dao.delete(jackSparrows);
+		dao.delete(jackSparrow);
 		dao.delete(capitanBarbosa);
 
 	}
@@ -63,7 +64,7 @@ public class UsuarioDaoTests {
 	@Test
 	public void testQueSePuedeBuscarUnUsuario() throws PersistenceException {
 
-		Usuario usuarioEncontrado = dao.findById(jackSparrows.getId());
+		Usuario usuarioEncontrado = dao.findById(jackSparrow.getId());
 
 		assertNotNull("El usuario con id 1 debe existir", usuarioEncontrado);
 		assertEquals("El usuario 1 tiene nombre: Jack", "Jack",
@@ -103,7 +104,7 @@ public class UsuarioDaoTests {
 	@Test
 	public void testQueSePuedeActualizarUnUsuario() throws PersistenceException {
 
-		Usuario usuarioEncontrado = dao.findById(jackSparrows.getId());
+		Usuario usuarioEncontrado = dao.findById(jackSparrow.getId());
 		assertEquals("El nombre del usuario con id 1 es Jack", "Jack",
 				usuarioEncontrado.getNombre());
 		usuarioEncontrado.setNombre("Jack");
@@ -129,10 +130,10 @@ public class UsuarioDaoTests {
 
 
     jackSparrow.seguir(capitanBarbosa);
+    
+    List <Usuario> genteAQuienJackSigue = jackSparrow.getSigue();
 
-    <List> genteAQuienJackSigue = jackSparrow.getSigue();
-
-    <List> tweetsDeGenteAQuienJackSigue = dao.traerTweetsDeQuienesSigo(jackSparrow.get_Id());
+    List <Tweet> tweetsDeGenteAQuienJackSigue = dao.traerTweetsDeQuienesSigo(jackSparrow.getId());
 
 	assertEquals("Jack debe estar siguiendo a un usuario llamado Barbosa", 1, genteAQuienJackSigue.size());
 
@@ -143,7 +144,7 @@ public class UsuarioDaoTests {
 
    jackSparrow.seguir(capitanBarbosa);
 
-   <List> seguidores = capitanBarbosa.getSeguidores();
+   List <Usuario> seguidores = capitanBarbosa.getSeguidores();
 
 	assertEquals("Barbosa debe estar siendo seguido por un usuario que es Jack", 1, seguidores.size());
 
@@ -155,7 +156,7 @@ public class UsuarioDaoTests {
 	jackSparrow.seguir(capitanBarbosa);
 	jackSparrow.dejarDeSeguir(capitanBarbosa);
 
-    <List> seguidores = capitanBarbosa.getSeguidores();
+	List <Usuario> seguidores = capitanBarbosa.getSeguidores();
 
 	assertEquals("Barbosa no deberia estar siguiendo a nadie.", 0, seguidores.size());
 
