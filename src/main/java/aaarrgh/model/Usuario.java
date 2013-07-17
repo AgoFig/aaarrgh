@@ -56,13 +56,9 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public void seguir(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public List<Usuario> getSigue() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -71,9 +67,17 @@ public class Usuario {
 		return null;
 	}
 
+
+	public boolean seguirOtros(Usuario usuarioSeguidor) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	public void dejarDeSeguir(Usuario capitanBarbosa) {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 	
 }

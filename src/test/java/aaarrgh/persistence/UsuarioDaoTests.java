@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import aaarrgh.model.Usuario;
+import aaarrgh.services.UserService;
 
 public class UsuarioDaoTests {
 
@@ -100,20 +101,7 @@ public class UsuarioDaoTests {
 
 	}
 
-	@Test
-	public void testQueSePuedeActualizarUnUsuario() throws PersistenceException {
 
-		Usuario usuarioEncontrado = dao.findById(jackSparrow.getId());
-		assertEquals("El nombre del usuario con id 1 es Jack", "Jack",
-				usuarioEncontrado.getNombre());
-		
-		usuarioEncontrado.setNombre("Jacksp");
-		dao.update(usuarioEncontrado);
-		assertEquals("El usuario con id 1 ahora tiene como nombre: Jacksp",
-				"Jacksp", usuarioEncontrado.getNombre());
-
-	}
-	
 
 	@Test
 	public void testQueSePuedenBuscarTodosLosUsuarios()
@@ -124,34 +112,33 @@ public class UsuarioDaoTests {
 				todosLosUsuarios.size());
 
 	}
-
+	
+	
+//Punto 5
+	
+	
+//PUnto 6
 	@Test
-	public void testQueSePuedaSeguirAOtroUsuario() throws PersistenceException {
+	public void testQuePuedaSeguirAOtros() {
 
+		UserService usuario  =  UserService.getInstance();
+		Usuario miUsuario 	 	 = usuario.getUsuarioByName("barbanegra");
+		Usuario miUsuarioAdd	 = usuario.getUsuarioByName("jacksparrow");
+		
+		System.out.println("Cantidad:" + miUsuario.getSigue().size());
+		
+		miUsuario.seguirOtros(miUsuarioAdd);
+		
+		System.out.println("Cantidad:" + miUsuario.getSigue().size());
 
-    jackSparrow.seguir(capitanBarbosa);
-    
-    List <Usuario> genteAQuienJackSigue = jackSparrow.getSigue();
-
-	assertEquals("Jack debe estar siguiendo a un usuario llamado Barbosa", 1, genteAQuienJackSigue.size());
 
 	}
 
-	@Test
-	public void testQueUnUserPuedaSerSeguido() throws PersistenceException {
-
-   jackSparrow.seguir(capitanBarbosa);
-
-   List <Usuario> seguidores = capitanBarbosa.getSeguidores();
-
-	assertEquals("Barbosa debe estar siendo seguido por un usuario que es Jack", 1, seguidores.size());
-
-	}
-
+//Punto 7
 	@Test
 	public void testQueSePuedaDejarDeSeguirAUnUser() throws PersistenceException {
 
-	jackSparrow.seguir(capitanBarbosa);
+	jackSparrow.seguirOtros(capitanBarbosa);
 	jackSparrow.dejarDeSeguir(capitanBarbosa);
 
 	List <Usuario> seguidores = capitanBarbosa.getSeguidores();
