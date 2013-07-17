@@ -28,7 +28,7 @@
 					<label class="control-label" for="inputUsername">Nombre de
 						usuario</label>
 					<div class="controls">
-						<input type="text" name="username" id="inputUsername"
+						<input type="text" name="user" id="inputUsername"
 							placeholder="jack">
 					</div>
 				</div>
