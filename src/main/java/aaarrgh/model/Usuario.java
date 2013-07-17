@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Usuario {
 
-	private Integer iduser;
+	//private Integer iduser;
 	private String nombre;
 	private String apellido;
 	private String mail;
@@ -19,12 +19,15 @@ public class Usuario {
 		return nombre + " " + apellido;
 	}
 	
+	/*
 	public Integer getId() {
 		return iduser;
 	}
 	public void setId(Integer iduser) {
 		this.iduser = iduser;
 	}
+	
+	*/
 	public String getNombre() {
 		return nombre;
 	}

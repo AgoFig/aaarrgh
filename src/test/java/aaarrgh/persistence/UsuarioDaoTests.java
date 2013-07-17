@@ -22,16 +22,16 @@ public class UsuarioDaoTests {
 	
 	@Before
 	public void setUp() throws PersistenceException {
-		// se borran todas los usuarios, para iniciar con base vacÃ­a
+		// se borran todas los usuarios, para iniciar con base vacía
 		for (Usuario cadaUsuario : dao.findAll()) {
 			dao.delete(cadaUsuario);
 		}
 
 		// se insertan:
-		jackSparrow=buildUsuario(1,"jacksparrows","jack","Jack","Sparrows","jack@sparrows.com");
+		jackSparrow=buildUsuario("jacksparrows","jack","Jack","Sparrows","jack@sparrows.com");
 		dao.insert(jackSparrow);
 
-		capitanBarbosa = buildUsuario(2, "capitanbarbosa", "barbosa","Capitan","Barbosa",
+		capitanBarbosa = buildUsuario("capitanbarbosa", "barbosa","Capitan","Barbosa",
 				"cap@barbosa.com");
 		dao.insert(capitanBarbosa);
 
@@ -39,10 +39,10 @@ public class UsuarioDaoTests {
 
 	}
 
-	private Usuario buildUsuario(Integer iduser, String user,
+	private Usuario buildUsuario(String user,
 			String password, String nombre, String apellido, String mail) {
 		Usuario usuario = new Usuario();
-		usuario.setId(iduser);
+		//usuario.setId(iduser);
 		usuario.setUser(user);
 		usuario.setPassword(password);
 		usuario.setNombre(nombre);
@@ -60,7 +60,7 @@ public class UsuarioDaoTests {
 		dao.delete(capitanBarbosa);
 
 	}
-
+/*
 	@Test
 	public void testQueSePuedeBuscarUnUsuario() throws PersistenceException {
 
@@ -75,32 +75,42 @@ public class UsuarioDaoTests {
 				"jack@sparrows.com", usuarioEncontrado.getMail());
 
 	}
+*/
+	@Test
+	public void testQueSePuedeBuscarUnUsuarioPorUsuario() throws PersistenceException {
+
+		Usuario usuarioEncontrado = dao.findByUser(jackSparrow.getUser());
+
+		assertNotNull("El usuario  debe existir", usuarioEncontrado);
+		assertEquals("El usuario es: jacksparrows", "jacksparrows",
+				usuarioEncontrado.getUser());
+
+	}
+	
 
 	@Test
 	public void testQueSePuedeInsertarUnUsuario() throws PersistenceException {
 
-		Usuario barbaNegra = buildUsuario(3, "barbanegra", "negra","Barba","Negra", "barbanegra@gmail.com");
+		Usuario barbaNegra = buildUsuario( "barbanegra", "negra","Barba","Negra", "barbanegra@gmail.com");
 		assertEquals("antes de insertar hay 2 usuario", 2, dao.findAll().size());
 
 		dao.insert(barbaNegra);
 		assertEquals("luego de insertar hay 3 usuarios", 3, dao.findAll()
 				.size());
-		assertNotNull("puede encontrarse al usuario con id 3",
-				dao.findById(barbaNegra.getId()));
-
+		
 	}
 
+	//Test fallando
 	@Test
 	public void testQueSePuedeBorrarUnUsuario() throws PersistenceException {
 
-		Usuario usuarioEncontrado = dao.findById(capitanBarbosa.getId());
+		Usuario usuarioEncontrado = dao.findByUser(capitanBarbosa.getNombre());
 		dao.delete(usuarioEncontrado);
 
-		usuarioEncontrado = dao.findById(2);
+		usuarioEncontrado = dao.findByUser(capitanBarbosa);
 		assertNull("El usuario con id 2 no debe existir", usuarioEncontrado);
-
+		
 	}
-
 
 
 	@Test
