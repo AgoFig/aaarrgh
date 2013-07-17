@@ -5,28 +5,35 @@
 <html>
 <head>
 <title>Bienvenido</title>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 <body>
+<div class="container">
 	<div class="header">
-		<h1>Aaarrgh</h1>
-		<h3>Version 2.0</h3>
+	<div class="barra-top">
+			<div class="color rojo"></div>
+			<div class="color naranja"></div>
+			<div class="color gris"></div>
+			<div class="color negro"></div>
+			<div class="color blanco"></div>
+		</div>
+		<div class="logo">
+			<img alt="logo" src="../img/logo.png">
+		</div>
 	</div>
 	<p>${message}</p>
 	<div>
-		<form
-			action="tweet/postear.do" >
-			<input type="text" value="Que hay de nuevo marinero?" />
-			<input type="submit" class="btn" />
+		<form action="tweet/postear.do">
+			<input type="text" value="Que hay de nuevo marinero?" /> <input
+				type="submit" class="btn" />
 		</form>
 	</div>
-	<div class="barra-lateral" >
-		<a href="usuario/perfil.do">Mi Perfil</a>
-		<a href="usuario/perfil.do">A quienes sigo</a>
-		<a href="usuario/perfil.do">Mis seguidores</a>
+	<div class="barra-lateral">
+		<a href="usuario/perfil.do" class="miperfil">Mi Perfil</a> <a
+			href="usuario/perfil.do" class="sigo">A quienes sigo</a> <a
+			href="usuario/perfil.do" class="seguidores">Mis seguidores</a>
 	</div>
-	<div class="lista-feed">
-	${listadoTweet}
+	<div class="lista-feed">${listadoTweet}</div>
 	</div>
 </body>
 </html>

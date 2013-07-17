@@ -18,5 +18,7 @@ public interface UsuarioDao {
     public List<Usuario> findAll() throws PersistenceException;
 
 	public List<Tweet> traerTweetsDeQuienesSigo(Integer id);
+
+	Usuario findByUser(String name) throws PersistenceException;
     
 }

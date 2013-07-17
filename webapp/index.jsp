@@ -9,6 +9,7 @@
 
 </head>
 <body>
+<div id="login-wrapper">
 	<div class="container">
 		<div class="barra-top">
 			<div class="color rojo"></div>
@@ -54,6 +55,7 @@
 			<p>2013 | Aaargh</p>
 		</div>
 
+	</div>
 	</div>
 </body>
 </html>

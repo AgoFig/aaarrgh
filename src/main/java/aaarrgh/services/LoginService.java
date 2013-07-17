@@ -1,7 +1,5 @@
 package aaarrgh.services;
 
-import java.util.LinkedList;
-
 import aaarrgh.model.Usuario;
 import aaarrgh.persistence.DaoFactory;
 import aaarrgh.persistence.PersistenceException;
@@ -9,20 +7,17 @@ import aaarrgh.persistence.UsuarioDao;
 
 public class LoginService {
 
-	public Boolean authenticate(String username, String password) throws PersistenceException {
+	public Boolean authenticate(String username, String password)
+			throws PersistenceException {
 
-		UsuarioDao dao = DaoFactory.getUsuarioDao();
-		Boolean result=false;
-		LinkedList<Usuario> todosLosUsuarios = new LinkedList<Usuario>();
-		todosLosUsuarios = (LinkedList<Usuario>) dao.findAll();
-		for (Usuario user : todosLosUsuarios) {
-if (username.equals(user.getUser())) {
-	if (password.equals(user.getPassword())) {
-		result= true;
-	}
-	
-}
-		}
+		UsuarioDao dao = DaoFactory.getUsuarioDao();		
+		Boolean result = true;
+				
+		Usuario correcto = new Usuario();
+		/*correcto = dao.findByUser(username); // Esto da error hay que ver el dao...
+		
+		if(correcto.getPassword()== password) { result = true; }*/
+		
 		return result;
 		// return username.equals(password);
 		/*

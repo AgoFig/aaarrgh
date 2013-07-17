@@ -135,6 +135,29 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		return usuario;
 	}
 
+	@Override
+	public Usuario findByUser(String name) throws PersistenceException {
+		if (name == null) {
+			throw new IllegalArgumentException(
+					"El id de persona no debe ser nulo");
+		}
+		Usuario usuario = null;
+		try {
+			Connection c = ConnectionProvider.getInstance().getConnection();
+			String query = "select * from usuario where user = ?";
+			PreparedStatement statement = c.prepareStatement(query);
+			statement.setString(1, name);
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				usuario = convertOne(resultSet);
+			}
+		} catch (SQLException sqlException) {
+			throw new PersistenceException(sqlException);
+		}
+		return usuario;
+	}
+
+	
 	private Usuario convertOne(ResultSet resultSet) throws SQLException {
 		Usuario retorno = new Usuario();
 
