@@ -30,7 +30,8 @@ public class LoginController {
 		return dispatch;
 
 	}
-
+	
+	@RequestMapping("/out")
 	public ModelAndView logout() {
 		ModelAndView dispatch = null;
 		

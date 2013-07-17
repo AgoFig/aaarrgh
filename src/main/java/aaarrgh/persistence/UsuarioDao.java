@@ -13,12 +13,13 @@ public interface UsuarioDao {
     
     public void update(Usuario usuario) throws PersistenceException;
     
-    public Usuario findById(Integer iduser) throws PersistenceException;
+    //public Usuario findById(Integer iduser) throws PersistenceException;
     
     public List<Usuario> findAll() throws PersistenceException;
 
-	public List<Tweet> traerTweetsDeQuienesSigo(Integer id);
+	//public List<Tweet> traerTweetsDeQuienesSigo(Integer id);
 
-	Usuario findByUser(String name) throws PersistenceException;
+
+	public Usuario findByUser(String name) throws PersistenceException;
     
 }
