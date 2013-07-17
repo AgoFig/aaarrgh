@@ -106,14 +106,16 @@ public class TweetDaoTests {
 
 		List<Tweet> todosLosTweetsdeSparrow = dao.findAllFromUser(iduser);
 
+		Tweet tercerTweet = todosLosTweetsdeSparrow.get(3);
+
 		assertEquals("Los tweets deberian ser tres", 3,
 				(int) todosLosTweetsdeSparrow.size());
 
 		assertEquals(
 				"El tweet 4 es: mi tercer tweet - Anteriormente elimine uno",
-				"Mi cuarto tweet", ((Object) todosLosTweetsdeSparrow).select(3).getTweet());
+				"Mi cuarto tweet", tercerTweet.getTweet());
 		assertEquals("El tweet 4 pertence al usuario: Sparrows", 1,
-				(int) ((Object) todosLosTweetsdeSparrow).select(3).getIduser());
+				(int) tercerTweet.getIduser());
 	}
 
 }
