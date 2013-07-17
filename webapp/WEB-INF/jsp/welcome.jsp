@@ -8,6 +8,10 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 <body>
+<% session.setAttribute("name", value);
+Object value = session.getAttribute("name");
+%>
+
 	<div id="welcome-wrapper ">
 		<div class="container ">
 			<div class="header clear">

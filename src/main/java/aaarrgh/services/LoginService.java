@@ -16,10 +16,17 @@ public class LoginService {
 		Usuario correcto = new Usuario();
 		correcto = dao.findByUser(username); // Esto da error hay que ver el dao...
 		
-		if(correcto.getPassword()== password) { result = true; }
+		if(correcto.getPassword()== password) { 
 		
-*/
+					Session sesion;
+			
+			 session.setAttribute("name", correcto.getId());
+			 Object value = session.getAttribute("name");
+		result = true;
+		 }
 		
+
+		*/
 		
 		return username.equals(password);
 		/*
