@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import aaarrgh.persistence.PersistenceException;
 import aaarrgh.services.LoginService;
 
 @Controller
@@ -16,7 +17,7 @@ public class LoginController {
 	@RequestMapping("/auth")
 	public ModelAndView authenticate(
 			@RequestParam("user") String user,
-			@RequestParam("password") String password) {
+			@RequestParam("password") String password) throws PersistenceException {
 
 		ModelAndView dispatch = null;
 

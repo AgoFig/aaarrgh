@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import aaarrgh.model.Tweet;
 import aaarrgh.model.Usuario;
 
 public class UsuarioDaoTests {
@@ -107,9 +106,10 @@ public class UsuarioDaoTests {
 		Usuario usuarioEncontrado = dao.findById(jackSparrow.getId());
 		assertEquals("El nombre del usuario con id 1 es Jack", "Jack",
 				usuarioEncontrado.getNombre());
-		usuarioEncontrado.setNombre("Jack");
+		
+		usuarioEncontrado.setNombre("Jacksp");
 		dao.update(usuarioEncontrado);
-		assertEquals("el usuario con id 1 ahora tiene como nombre: Jacksp",
+		assertEquals("El usuario con id 1 ahora tiene como nombre: Jacksp",
 				"Jacksp", usuarioEncontrado.getNombre());
 
 	}
@@ -132,8 +132,6 @@ public class UsuarioDaoTests {
     jackSparrow.seguir(capitanBarbosa);
     
     List <Usuario> genteAQuienJackSigue = jackSparrow.getSigue();
-
-    List <Tweet> tweetsDeGenteAQuienJackSigue = dao.traerTweetsDeQuienesSigo(jackSparrow.getId());
 
 	assertEquals("Jack debe estar siguiendo a un usuario llamado Barbosa", 1, genteAQuienJackSigue.size());
 
