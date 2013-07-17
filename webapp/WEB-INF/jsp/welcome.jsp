@@ -28,8 +28,9 @@
 			<div class="contenido clear">
 				<div class="barra-postear rojo">
 					<form action="tweet/postear.do">
-						<input type="text" value="Que hay de nuevo marinero?" /> <input
-							type="submit" class="btn" />
+						<input type="text" value="Que hay de nuevo marinero?" id="mensaje" maxLength="140" /> 
+						<input
+							type="submit" id="enviar-twit" class="btn" value="Aaarrgh!" />
 						<p class="float-right">${message}</p>
 					</form>
 				</div>
