@@ -29,9 +29,12 @@ public class TweetService {
 		return instance;
 	}
 
-	public char[] getCantidadImproperios(Usuario miUsuario) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getCantidadImproperios(Usuario miUsuario) throws PersistenceException {
+		TweetDao dao = DaoFactory.getTweetDao();	
+		
+		 List<Tweet> tweets = dao.findAllFromUser(miUsuario.getUser());
+		int cantidad = tweets.size();
+		return cantidad;	
 	}
 	public List<Tweet> getImproperios(String user) throws PersistenceException {
 		
