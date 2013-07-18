@@ -4,12 +4,13 @@ import java.util.List;
 
 public class Usuario {
 
-	//private Integer iduser;
+	private Integer iduser;
 	private String nombre;
 	private String apellido;
 	private String mail;
 	private String user;
 	private String password;
+	private Boolean valido;
 
 	public Usuario() {
 		super();
@@ -19,7 +20,7 @@ public class Usuario {
 		return nombre + " " + apellido;
 	}
 	
-	/*
+	
 	public Integer getId() {
 		return iduser;
 	}
@@ -27,7 +28,7 @@ public class Usuario {
 		this.iduser = iduser;
 	}
 	
-	*/
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -59,6 +60,14 @@ public class Usuario {
 		this.password = password;
 	}
 
+
+	public Boolean getValido() {
+		return valido;
+	}
+
+	public void setValido(Boolean valido) {
+		this.valido = valido;
+	}
 
 	public List<Usuario> getSigue() {
 		

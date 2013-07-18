@@ -168,6 +168,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		retorno.setApellido(resultSet.getString("apellido"));
 		retorno.setPassword(resultSet.getString("password"));
 		retorno.setMail(resultSet.getString("mail"));
+		retorno.setId(resultSet.getInt("id_user"));
 
 		return retorno;
 	}

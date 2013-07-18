@@ -19,6 +19,7 @@
 			<div class="color blanco"></div>
 		</div>
 		<div class="alert">${message}</div>
+		
 
 		<div class="login float-left grid50">
 			<div class="logo">
