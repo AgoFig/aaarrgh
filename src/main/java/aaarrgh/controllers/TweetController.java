@@ -1,11 +1,15 @@
 package aaarrgh.controllers;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import aaarrgh.model.Tweet;
+import aaarrgh.model.Usuario;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.services.TweetService;
 
@@ -38,9 +42,29 @@ public class TweetController {
 
 	}
 
-	public ModelAndView logout() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping("/listar")
+	public ModelAndView verTweets() throws PersistenceException {
+		
+		//Reviso la sesion
+		//Usuario sesion = (Usuario)request.getSession().getAttribute("usuario");
+		
+		// traigo todos los tweets de el user y de los qeu sigue
+		
+		List<Tweet> tweets = tweetService.getImproperios("paulitta");
+		String generaLista = null;
+		for (Tweet tweet : tweets) {
+			generaLista += tweet.getTweet()+"<br />";
+		}
+		
+		ModelAndView dispatch = null;
+		//if (tweets.isEmpty()) {
+		dispatch = new ModelAndView("welcome", "listadoTweet", "No hay tweets."); 
+	//} else {
+	//		dispatch = new ModelAndView("welcome", "listadoTweet", generaLista);
+	//	}
+
+		return dispatch;
+
 	}
 
 }

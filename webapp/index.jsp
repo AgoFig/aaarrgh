@@ -29,15 +29,13 @@
 					<label class="control-label" for="inputUsername">Nombre de
 						usuario</label>
 					<div class="controls">
-						<input type="text" name="user" id="inputUsername"
-							placeholder="jack">
+						<input type="text" name="user" id="inputUsername">
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label" for="inputPassword">Contraseña</label>
 					<div class="controls">
-						<input type="password" name="password" id="inputPassword"
-							placeholder="Contraseña">
+						<input type="password" name="password" id="inputPassword">
 					</div>
 				</div>
 				<div class="control-group">
