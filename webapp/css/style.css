@@ -137,3 +137,17 @@ body {
 	width: 300px;
 	text-align: right;
 }
+
+.btn {
+	width: 150px;
+	height: 80px;
+}
+
+#postear-twit {
+	height: 80px;
+	width: 300px;
+}
+
+.btn:hover {
+	background-color: orange;
+}

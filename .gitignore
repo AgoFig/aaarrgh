@@ -1,3 +1,9 @@
 build/
 .settings/
+<<<<<<< HEAD
+classpath
 .classpath
+aaarrgh.db
+=======
+.classpath
+>>>>>>> b532b638fb1aa7afb7138be42655f2d775eb212e
