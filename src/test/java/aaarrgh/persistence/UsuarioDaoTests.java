@@ -107,7 +107,7 @@ public class UsuarioDaoTests {
 		Usuario usuarioEncontrado = dao.findByUser(capitanBarbosa.getNombre());
 		dao.delete(usuarioEncontrado);
 
-		usuarioEncontrado = dao.findByUser(capitanBarbosa.getNombre());
+
 		assertNull("El usuario con id 2 no debe existir", usuarioEncontrado);
 		
 	}
