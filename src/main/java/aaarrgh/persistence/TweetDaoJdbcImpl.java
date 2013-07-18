@@ -22,12 +22,11 @@ public class TweetDaoJdbcImpl implements TweetDao{
 
 		try {
 			tx.begin();
-			String query = "insert into mensaje (id_tweet, tweet, id_user) values (?,?,?)";
+			String query = "insert into mensaje (tweet, id_user) values (?,?)";
 			PreparedStatement statement = TransactionJdbcImpl.getInstance()
 					.getConnection().prepareStatement(query);
-			statement.setInt(1, tweet.getId());
-			statement.setString(2, tweet.getTweet());
-			statement.setInt(3, tweet.getIduser());
+			statement.setString(1, tweet.getTweet());
+			statement.setInt(2, tweet.getIduser());
 				
 			
 			statement.executeUpdate();

@@ -27,8 +27,8 @@
 			</div>
 			<div class="contenido clear gris-claro">
 				<div class="barra-postear rojo">
-					<form action="tweet/postear.do">
-						<input type="text" value="Que hay de nuevo marinero?" /> <input
+					<form action="../tweet/postear.do">
+						<input type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
 							type="submit" class="btn" />
 						<p class="float-right">${message}</p>
 					</form>
