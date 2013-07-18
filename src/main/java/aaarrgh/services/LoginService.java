@@ -5,6 +5,9 @@ import aaarrgh.persistence.DaoFactory;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.persistence.UsuarioDao;
 
+//import javax.servlet.http.HttpSession;
+
+
 public class LoginService {
 
 	public Boolean authenticate(String username, String password)
@@ -15,11 +18,7 @@ public class LoginService {
 				
 		Usuario correcto = new Usuario();
 		correcto = dao.findByUser(username); // Esto da error hay que ver el dao...
-<<<<<<< HEAD
-		
-		if(correcto.getPassword()== password) { result = true; }
-=======
-		
+	
 		if(correcto.getPassword()== password) { result = true; }
 		
 */
