@@ -12,19 +12,18 @@ public class LoginService {
 
 	public Boolean authenticate(String username, String password)
 			throws PersistenceException {
-/*
+
 		UsuarioDao dao = DaoFactory.getUsuarioDao();		
 		Boolean result = false;
 				
 		Usuario correcto = new Usuario();
-		correcto = dao.findByUser(username); // Esto da error hay que ver el dao...
-
-		if(correcto.getPassword()== password) { result = true; }
+		correcto = dao.findByUser(username);
 		
-*/
+		if(password.equals(correcto.getPassword())){
+			result = true; 
+		}
 		
-		
-		return username.equals(password);
+		return result;
 		/*
 		 * Aca hay que borrar esto de arriba y consultar al dao para comparar
 		 * los parametros recibidos contra los que se encuentran en la bdd
