@@ -141,7 +141,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 	public Usuario findByUser(String name) throws PersistenceException {
 		if (name == null) {
 			throw new IllegalArgumentException(
-					"El id de persona no debe ser nulo");
+					"El user de persona no debe ser nulo");
 		}
 		Usuario usuario = null;
 		try {
