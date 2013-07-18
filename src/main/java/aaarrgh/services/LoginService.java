@@ -18,7 +18,7 @@ public class LoginService {
 				
 		Usuario correcto = new Usuario();
 		correcto = dao.findByUser(username); // Esto da error hay que ver el dao...
-	
+
 		if(correcto.getPassword()== password) { result = true; }
 		
 */
