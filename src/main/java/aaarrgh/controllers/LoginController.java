@@ -45,8 +45,11 @@ public class LoginController extends HttpServlet {
 	}
 
 	public ModelAndView logout() {
-		// TODO Auto-generated method stub
-		return null;
+		ModelAndView dispatch = null;
+		
+		dispatch = new ModelAndView("../../index", "message", "Logout exitoso.");
+		
+		return dispatch;
 	}
 
 }

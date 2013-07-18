@@ -12,7 +12,10 @@
 	<div class="header"></div>
 	<div class="cuerpo">
 		<div class="tweets float-left">
-			<div class="tweet"></div>
+			<div class="tweet">
+			
+			${todosTweets}
+			</div>
 		</div>
 		<div class="menu float-left">
 			<ul>

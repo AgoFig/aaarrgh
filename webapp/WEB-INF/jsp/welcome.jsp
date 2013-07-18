@@ -8,8 +8,8 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 <body>
-	<div id="welcome-wrapper">
-		<div class="container gris-claro">
+	<div id="welcome-wrapper ">
+		<div class="container ">
 			<div class="header clear">
 				<div class="barra-top clear">
 					<div class="color rojo"></div>
@@ -25,7 +25,7 @@
 					<img alt="mini pirata" src="../img/mini-pirata.png">
 				</div>
 			</div>
-			<div class="contenido clear gris-claro">
+			<div class="contenido clear">
 				<div class="barra-postear rojo">
 					<form action="../tweet/postear.do">
 						<input type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
@@ -33,8 +33,8 @@
 						<p class="float-right">${message}</p>
 					</form>
 				</div>
-				<div class="tweets blanco float-left">
-					<div class="tweet">Blablabla</div>
+				<div class="tweets float-left">
+					<div class="lista-feed">${listadoTweet}</div>
 				</div>
 				<div class="barra-lateral float-right rojo">
 
@@ -48,7 +48,7 @@
 						<a href="usuario/perfil.do" class="seguidores">Mis seguidores</a>
 					</div>
 				</div>
-				<div class="lista-feed">${listadoTweet}</div>
+				
 			</div>
 		</div>
 	</div>
