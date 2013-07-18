@@ -8,8 +8,6 @@
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 </head>
 <body>
-
-
 	<div id="welcome-wrapper ">
 		<div class="container ">
 			<div class="header clear">
@@ -29,10 +27,9 @@
 			</div>
 			<div class="contenido clear">
 				<div class="barra-postear rojo">
-					<form action="tweet/postear.do">
-						<input type="text" value="Que hay de nuevo marinero?" id="mensaje" maxLength="140" /> 
-						<input
-							type="submit" id="enviar-twit" class="btn" value="Aaarrgh!" />
+					<form action="../tweet/postear.do">
+						<input type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
+							type="submit" class="btn" />
 						<p class="float-right">${message}</p>
 					</form>
 				</div>
