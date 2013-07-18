@@ -5,7 +5,7 @@ import aaarrgh.persistence.DaoFactory;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.persistence.UsuarioDao;
 
-//import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 
 public class LoginService {

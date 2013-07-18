@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import aaarrgh.model.Usuario;
@@ -25,7 +26,7 @@ public class UsuarioController {
 		String perfil = user.getFullName()+user.getMail();
 		
 		
-			dispatch = new ModelAndView("../../index", "perfil", perfil);
+			dispatch = new ModelAndView("perfil", "perfil", perfil);
 		
 		return dispatch;
 
@@ -41,10 +42,10 @@ public class UsuarioController {
 		
 		String listaSeguidores = null;
 		for (Usuario usuario : meSigue) {
-			listaSeguidores += "@"+usuario.getUser();
+			listaSeguidores += " @"+usuario.getUser();
 		}
 		
-			dispatch = new ModelAndView("../../index", "listaSeguidores", listaSeguidores);
+			dispatch = new ModelAndView("seguidores", "listaSeguidores", listaSeguidores);
 		
 		return dispatch;
 
@@ -63,7 +64,21 @@ public class UsuarioController {
 			listaSiguiendo += "@"+usuario.getUser();
 		}
 		
-			dispatch = new ModelAndView("../../index", "listaSiguiendo", listaSiguiendo);
+			dispatch = new ModelAndView("siguiendo", "listaSiguiendo", listaSiguiendo);
+		
+		return dispatch;
+
+	}
+	
+	@RequestMapping("/seguir")
+	public ModelAndView seguir(@RequestParam("seguidor") String seguidor,@RequestParam("seguido") String seguido) throws PersistenceException {
+
+		ModelAndView dispatch = null;
+
+		usuarioService.seguirUsuario(usuarioService.getUsuarioByName(seguidor), usuarioService.getUsuarioByName(seguido));
+		
+				
+			dispatch = new ModelAndView("siguiendo", "mensajeSiguiendo", "Ahroa esta siguiendo a "+seguido);
 		
 		return dispatch;
 

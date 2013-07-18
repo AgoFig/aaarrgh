@@ -36,17 +36,18 @@
 				<div class="tweets float-left">
 				
 					<div class="lista-feed">${listadoTweet}</div>
+					<a href="../tweet/listar.do">Ver Tweets</a>
 				</div>
 				<div class="barra-lateral float-right rojo">
 
 					<div>
-						<a href="usuario/perfil.do" class="miperfil">Mi Perfil</a>
+						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>
 					</div>
 					<div>
-						<a href="usuario/perfil.do" class="sigo">A quienes sigo</a>
+						<a href="../usuario/seguidores.do" class="sigo">A quienes sigo</a>
 					</div>
 					<div>
-						<a href="usuario/perfil.do" class="seguidores">Mis seguidores</a>
+						<a href="../usuario/siguiendo.do" class="seguidores">Mis seguidores</a>
 					</div>
 				</div>
 				
