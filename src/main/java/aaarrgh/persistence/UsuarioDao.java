@@ -2,7 +2,6 @@ package aaarrgh.persistence;
 
 import java.util.List;
 
-import aaarrgh.model.Tweet;
 import aaarrgh.model.Usuario;
 
 public interface UsuarioDao {

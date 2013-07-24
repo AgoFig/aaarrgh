@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
 	
 	LoginService loginService = new LoginService();
 	
-	 public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+	/* public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		
 		HttpSession session = request.getSession(true);
 		String user = request.getParameter("user");
@@ -40,23 +40,25 @@ public class LoginController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
+*/
 		@RequestMapping("/auth")
 		public ModelAndView authenticate(
 			@RequestParam("user") String user,
-			@RequestParam("password") String password) throws PersistenceException {
+			@RequestParam("password") String password,HttpServletRequest request) throws PersistenceException {
 		
-//		HttpSession session = null;
-//		
-//		session.setAttribute("user", user);
-//		
-//		String usuario = (String) session.getAttribute("user"); 
-//		
+
 		ModelAndView dispatch = null;
 		
 		Usuario usuario = new Usuario();
 		usuario = loginService.authenticate(user, password);
 		if (usuario.getValido()) {
+			HttpSession session = request.getSession(true);
+			//String user = request.getParameter("user");
+			//String password = request.getParameter("password");
+			session.setAttribute("userObject", usuario);
+			
+			//mapa con todo (HashMap)
+			
 			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + user); 
 		} else {
 			dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
