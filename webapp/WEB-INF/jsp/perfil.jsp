@@ -27,7 +27,7 @@
 			</div>
 			<div class="contenido clear">
 				<div class="barra-postear rojo">
-					<form action="../tweet/postear.do">
+					<form class="hidden" action="../tweet/postear.do">
 						<input id="postear-twit" type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
 							type="submit" class="btn" value="Aaarrgh!"/>
 						<p class="float-right">${message}</p>
@@ -35,7 +35,6 @@
 				</div>
 				<div class="tweets float-left">
 					<div class="lista-feed">${perfil}</div>
-					<a href="../tweet/listar.do">Ver Tweets</a>
 				</div>
 				<div class="barra-lateral float-right rojo">
 					
