@@ -38,7 +38,10 @@
 					<a href="../tweet/listar.do">Ver Tweets</a>
 				</div>
 				<div class="barra-lateral float-right rojo">
-
+					
+					<div>
+						<a href="../login/auth.do" class="miperfil">Ver Tweets</a>
+					</div>
 					<div>
 						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>
 					</div>

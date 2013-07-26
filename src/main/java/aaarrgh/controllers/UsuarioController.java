@@ -2,6 +2,9 @@ package aaarrgh.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,11 +21,17 @@ public class UsuarioController {
 	UserService usuarioService = new UserService();
 
 	@RequestMapping("/perfil")
-	public ModelAndView getPerfil() throws PersistenceException {
+	public ModelAndView getPerfil(HttpServletRequest request) throws PersistenceException {
 
 		ModelAndView dispatch = null;
-
-		Usuario user = usuarioService.getUsuarioByName("Paula");
+		
+		/* BEGIN PAU */
+		HttpSession session = request.getSession(true);
+		Usuario usuarioSession = new Usuario();
+		usuarioSession = (Usuario) session.getAttribute("userObject");	
+		Usuario user = usuarioService.getUsuarioByName(usuarioSession.getUser());
+		/* END PAU */
+		
 		String perfil = null;
 		perfil = user.getFullName() + user.getMail();
 

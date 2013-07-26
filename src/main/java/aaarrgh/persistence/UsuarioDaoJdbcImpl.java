@@ -138,8 +138,8 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 	}
 */
 	@Override
-	public Usuario findByUser(String name) throws PersistenceException {
-		if (name == null) {
+	public Usuario findByUser(String user) throws PersistenceException {
+		if (user == null) {
 			throw new IllegalArgumentException(
 					"El user de persona no debe ser nulo");
 		}
@@ -148,7 +148,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 			Connection c = ConnectionProvider.getInstance().getConnection();
 			String query = "select * from usuario where user = ?";
 			PreparedStatement statement = c.prepareStatement(query);
-			statement.setString(1, name);
+			statement.setString(1, user);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				usuario = convertOne(resultSet);

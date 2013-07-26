@@ -17,10 +17,10 @@ public class UserService {
 		return instance;
 	}
 
-	public Usuario getUsuarioByName(String string) throws PersistenceException {
+	public Usuario getUsuarioByName(String user) throws PersistenceException {
 		UsuarioDao dao = DaoFactory.getUsuarioDao();
 		Usuario usuario = null;
-		usuario = dao.findByUser(string);
+		usuario = dao.findByUser(user);
 		return usuario;
 	}
 	

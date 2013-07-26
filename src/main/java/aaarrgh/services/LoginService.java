@@ -18,7 +18,7 @@ public class LoginService {
 		Usuario correcto = new Usuario();
 		correcto = dao.findByUser(username);
 		
-		if(password.equals(correcto.getPassword())){ // Acá no se debería corroborar si existe el usuario o lo hace desde el UsuarioDao?
+		if(password.equals(correcto.getPassword())){
 			correcto.setValido(true); 
 		}else{
 			correcto.setValido(false);
