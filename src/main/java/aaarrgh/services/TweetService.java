@@ -32,16 +32,16 @@ public class TweetService {
 	public int getCantidadImproperios(Usuario miUsuario) throws PersistenceException {
 		TweetDao dao = DaoFactory.getTweetDao();	
 		
-		 List<Tweet> tweets = dao.findAllFromUser(miUsuario.getUser());
+		 List<Tweet> tweets = dao.findAllFromUser(miUsuario.getId()); // esto cambia por el id del usuario
 		int cantidad = tweets.size();
 		return cantidad;	
 	}
-	public List<Tweet> getImproperios(String user) throws PersistenceException {
+	public List<Tweet> getImproperios(Integer idUser) throws PersistenceException { // esto cambia el String por un int ya que el metodo requiere in INT
 		
 		TweetDao dao = DaoFactory.getTweetDao();		
 		List<Tweet> tweets;
 		
-		 tweets= dao.findAllFromUser(user);
+		 tweets= dao.findAllFromUser(idUser); 
 		
 		return tweets;		
 	}

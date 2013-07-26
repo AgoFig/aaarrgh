@@ -24,40 +24,27 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	LoginService loginService = new LoginService();
-	
-	 public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-		
-		HttpSession session = request.getSession(true);
-		String user = request.getParameter("user");
-		String password = request.getParameter("password");
-		session.setAttribute("user", user);
-		session.setAttribute("password", password);
-		
-		try {
-			authenticate(user, password);
-		} catch (PersistenceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 		@RequestMapping("/auth")
 		public ModelAndView authenticate(
 			@RequestParam("user") String user,
-			@RequestParam("password") String password) throws PersistenceException {
-		
-//		HttpSession session = null;
-//		
-//		session.setAttribute("user", user);
-//		
-//		String usuario = (String) session.getAttribute("user"); 
-//		
+			@RequestParam("password") String password,
+			HttpServletRequest request) throws PersistenceException {
+				
 		ModelAndView dispatch = null;
 		
 		Usuario usuario = new Usuario();
 		usuario = loginService.authenticate(user, password);
 		if (usuario.getValido()) {
-			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + user); 
+			
+			HttpSession session = request.getSession(true);
+			session.setAttribute("userObject", usuario);
+			
+			//mapa con todo (HashMap)
+			
+			Usuario usuarioSession = new Usuario();
+			usuarioSession = (Usuario) session.getAttribute("userObject");
+			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + usuarioSession.getUser()); 
 		} else {
 			dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
 		}

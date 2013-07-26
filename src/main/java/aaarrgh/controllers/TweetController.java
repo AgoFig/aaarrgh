@@ -2,6 +2,7 @@ package aaarrgh.controllers;
 
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
@@ -18,8 +19,7 @@ import aaarrgh.model.Usuario;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.services.TweetService;
 
-@Controller
-@SessionAttributes("idUsuario") 
+@Controller 
 @RequestMapping("/tweet")
 public class TweetController extends HttpServlet {
 
@@ -28,22 +28,22 @@ public class TweetController extends HttpServlet {
 	TweetService tweetService = new TweetService(); 
 	
 	@RequestMapping("/postear")
-	public ModelAndView insertarTweet(@RequestParam("comentario") String comentario) throws PersistenceException {
-		
-		// cargo el objeto tweet
-		 ModelAndView modelAndView = new ModelAndView();
-		Tweet tweet = new Tweet();
-		tweet.setTweet(comentario);
-		//tweet.setIduser( modelAndView.);
+	public ModelAndView insertarTweet(@RequestParam("comentario") String comentario, HttpServletRequest request) throws PersistenceException {
 		
 		ModelAndView dispatch = null;
+		HttpSession session = request.getSession(true);
+		Usuario usuarioSession = new Usuario();
+		usuarioSession = (Usuario) session.getAttribute("userObject");
 		
-		tweetService.insertTweet(tweet);
+		// cargo el objeto tweet
+		Tweet tweet = new Tweet();
+		tweet.setTweet(comentario);
+		tweet.setIduser( usuarioSession.getId());
 		
 		if (tweetService.insertTweet(tweet)) {
-			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" ); 
+			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + usuarioSession.getUser()); 
 		} else {
-			dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
+			dispatch = new ModelAndView("welcome", "message", "Ingreso incorrecto" + usuarioSession.getUser());
 		}
 
 		return dispatch;
@@ -51,25 +51,27 @@ public class TweetController extends HttpServlet {
 	}
 
 	@RequestMapping("/listar")
-	public ModelAndView verTweets() throws PersistenceException {
+	public ModelAndView verTweets(HttpServletRequest request) throws PersistenceException {
 		
-		//Reviso la sesion
-		//Usuario sesion = (Usuario)request.getSession().getAttribute("usuario");
+		HttpSession session = request.getSession(true);
+		Usuario usuarioSession = new Usuario();
+		usuarioSession = (Usuario) session.getAttribute("userObject");
+
 		
-		// traigo todos los tweets de el user y de los qeu sigue
+		// traigo todos los tweets de el user y de los que sigue
 		
-		List<Tweet> tweets = tweetService.getImproperios("paulitta");
+		List<Tweet> tweets = tweetService.getImproperios(usuarioSession.getId());
 		String generaLista = null;
 		for (Tweet tweet : tweets) {
 			generaLista += tweet.getTweet()+"<br />";
 		}
 		
 		ModelAndView dispatch = null;
-		//if (tweets.isEmpty()) {
+		if (tweets.isEmpty()) {
 		dispatch = new ModelAndView("welcome", "listadoTweet", "No hay tweets."); 
-	//} else {
-	//		dispatch = new ModelAndView("welcome", "listadoTweet", generaLista);
-	//	}
+	} else {
+			dispatch = new ModelAndView("welcome", "listadoTweet", generaLista);
+		}
 
 		return dispatch;
 

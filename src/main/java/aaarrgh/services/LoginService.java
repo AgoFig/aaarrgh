@@ -5,7 +5,7 @@ import aaarrgh.persistence.DaoFactory;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.persistence.UsuarioDao;
 
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
 
 public class LoginService {
@@ -18,7 +18,7 @@ public class LoginService {
 		Usuario correcto = new Usuario();
 		correcto = dao.findByUser(username);
 		
-		if(password.equals(correcto.getPassword())){
+		if(password.equals(correcto.getPassword())){ // Acá no se debería corroborar si existe el usuario o lo hace desde el UsuarioDao?
 			correcto.setValido(true); 
 		}else{
 			correcto.setValido(false);

@@ -51,7 +51,7 @@
 		</div>
 
 		<div class="footer">
-			<p>2013 | Aaargh</p>
+			<p>2013 | Aaarrgh</p>
 		</div>
 
 	</div>

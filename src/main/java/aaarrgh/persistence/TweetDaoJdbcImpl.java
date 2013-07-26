@@ -134,14 +134,14 @@ public class TweetDaoJdbcImpl implements TweetDao{
 		return retorno;
 	}
 	@Override
-	public List<Tweet> findAllFromUser(String user)
+	public List<Tweet> findAllFromUser(Integer idUser)
 			throws PersistenceException {
 		List<Tweet> lista = new LinkedList<Tweet>();
 		try {
 			Connection c = ConnectionProvider.getInstance().getConnection();
-			String query = "select * from mensaje where user = ?";
+			String query = "select * from mensaje where id_user = ?";
 			PreparedStatement statement = c.prepareStatement(query);
-			statement.setString(1, user);
+			statement.setInt(1, idUser);
 			ResultSet resultSet = statement.executeQuery();			
 			while (resultSet.next()) {
 				lista.add(convertOne(resultSet));

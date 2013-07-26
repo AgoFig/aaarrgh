@@ -27,7 +27,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 
 		try {
 			tx.begin();
-			String query = "insert into usuario (user, password, nombre,apellido,mail) values ( ?, ?, ?,?,?)";
+			String query = "insert into usuario (user, password, nombre,apellido,mail) values ( ?, ?, ?, ?, ?)";
 			PreparedStatement statement = TransactionJdbcImpl.getInstance()
 					.getConnection().prepareStatement(query);
 			//statement.setInt(1, usuario.getId());

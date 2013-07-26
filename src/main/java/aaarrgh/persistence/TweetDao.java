@@ -17,7 +17,8 @@ public interface TweetDao {
     
     public List<Tweet> findAll() throws PersistenceException;
 
-	public List<Tweet> findAllFromUser(String string) throws PersistenceException;
+	public List<Tweet> findAllFromUser(Integer idUser) throws PersistenceException; //public List<Tweet> findAllFromUser(String string) throws PersistenceException; esta mal 
+																					// en la tabla mensaje no tiene el monbre del usuario sino el id, ya puse Integer
 
     
 }
