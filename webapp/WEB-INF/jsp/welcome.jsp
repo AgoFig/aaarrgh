@@ -35,7 +35,7 @@
 				</div>
 				<div class="tweets float-left">
 				
-					<div class="lista-feed">${listadoTweet}</div> <!-- <c:forEach > -->
+					<div class="lista-feed">${listadoTweet}</div>
 					<a href="../tweet/listar.do">Ver Tweets</a>
 				</div>
 				<div class="barra-lateral float-right rojo">
