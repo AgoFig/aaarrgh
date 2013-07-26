@@ -80,14 +80,20 @@ public class Usuario {
 	}
 
 
-	public boolean seguirOtros(Usuario usuarioSeguidor) {
+	
+	public void dejarDeSeguir(Usuario usuarioSeguidor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean seguirUsuario(Usuario miUsuario, Usuario usuarioSeguidor) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public void dejarDeSeguir(Usuario capitanBarbosa) {
+	public boolean seguirUser(Usuario usuarioSeguidor) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	

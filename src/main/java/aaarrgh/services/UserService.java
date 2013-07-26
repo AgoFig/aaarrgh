@@ -3,6 +3,9 @@ package aaarrgh.services;
 import java.util.List;
 
 import aaarrgh.model.Usuario;
+import aaarrgh.persistence.DaoFactory;
+import aaarrgh.persistence.PersistenceException;
+import aaarrgh.persistence.UsuarioDao;
 
 public class UserService {
 	private static UserService instance = new UserService();
@@ -14,23 +17,25 @@ public class UserService {
 		return instance;
 	}
 
-	public Usuario getUsuarioByName(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	public Usuario getUsuarioByName(String string) throws PersistenceException {
+		UsuarioDao dao = DaoFactory.getUsuarioDao();
+		Usuario usuario = null;
+		usuario = dao.findByUser(string);
+		return usuario;
 	}
 	
 	public boolean seguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) {
 		
-		return miUsuario.seguirOtros(usuarioSeguidor);
+		return miUsuario.seguirUser(usuarioSeguidor);
 
 	}
 	
 	public boolean dejarDeSeguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) {
 		
-		List<Usuario> following = miUsuario.getSigue();
+		List<Usuario> siguiendo = miUsuario.getSigue();
 		
-		if (following.contains(usuarioSeguidor)) {
-			following.remove(usuarioSeguidor);
+		if (siguiendo.contains(usuarioSeguidor)) {
+			siguiendo.remove(usuarioSeguidor);
 			return true;
 		} 
 		return false;
