@@ -21,17 +21,19 @@ public class UsuarioController {
 	UserService usuarioService = new UserService();
 
 	@RequestMapping("/perfil")
-	public ModelAndView getPerfil(HttpServletRequest request) throws PersistenceException {
+	public ModelAndView getPerfil(HttpServletRequest request)
+			throws PersistenceException {
 
 		ModelAndView dispatch = null;
-		
+
 		/* BEGIN PAU */
 		HttpSession session = request.getSession(true);
 		Usuario usuarioSession = new Usuario();
-		usuarioSession = (Usuario) session.getAttribute("userObject");	
-		Usuario user = usuarioService.getUsuarioByName(usuarioSession.getUser());
+		usuarioSession = (Usuario) session.getAttribute("userObject");
+		Usuario user = usuarioService
+				.getUsuarioByName(usuarioSession.getUser());
 		/* END PAU */
-		
+
 		String perfil = null;
 		perfil = user.getFullName() + user.getMail();
 
@@ -41,31 +43,39 @@ public class UsuarioController {
 
 	}
 
+	// Obtener sus seguidores - cecilia
 	@RequestMapping("/seguidores")
-	public ModelAndView mostrarSeguidores(Usuario user)
+	public ModelAndView mostrarSeguidores(HttpServletRequest request)
 			throws PersistenceException {
-
+		
 		ModelAndView dispatch = null;
-
-		List<Usuario> meSigue = user.getSeguidores();
+		HttpSession session = request.getSession(true);
+		Usuario usuarioSession = new Usuario();
+		usuarioSession = (Usuario) session.getAttribute("userObject");
+		Usuario user = usuarioService.getUsuarioByName(usuarioSession.getUser());//busco al usuario que inicio sesion segun su user
+		
+		List<Usuario> meSiguen = usuarioService.getSeguidores(user.getId());//le mando el id de ese user para que traiga seguidores a una lista
 
 		String listaSeguidores = null;
-		for (Usuario usuario : meSigue) {
-			listaSeguidores += " @" + usuario.getUser();
+		for (Usuario usuario : meSiguen) {
+			listaSeguidores += " @" + usuario.getUser();//de getSeguidores obtengo los id's y aca estoy pidiendo los user's de los seguidores...¿?
 		}
 
-		dispatch = new ModelAndView("seguidores", "listaSeguidores",
-				listaSeguidores);
+		if (meSiguen.isEmpty()) {
+			dispatch = new ModelAndView("seguidores", "listadoSeguidores",
+					"No tiene seguidores");
+		} else {
+			dispatch = new ModelAndView("seguidores", "listadoSeguidores",
+					listaSeguidores);
+		}
 
 		return dispatch;
 
 	}
-
+//Siguiendo (falta terminar) - cecilia
 	@RequestMapping("/siguiendo")
 	public ModelAndView mostrarSiguiendo(Usuario user)
 			throws PersistenceException {
-
-		ModelAndView dispatch = null;
 
 		List<Usuario> estoySiguiendo = user.getSigue();
 
@@ -74,13 +84,19 @@ public class UsuarioController {
 			listaSiguiendo += "@" + usuario.getUser();
 		}
 
-		dispatch = new ModelAndView("siguiendo", "listaSiguiendo",
-				listaSiguiendo);
+		ModelAndView dispatch = null;
+		if (estoySiguiendo.isEmpty()) {
+			dispatch = new ModelAndView("seguiendo", "listadoSiguiendo",
+					"No esta siguiendo a nadie");
+		} else {
+			dispatch = new ModelAndView("seguiendo", "listadoSiguiendo",
+					listaSiguiendo);
+		}
 
 		return dispatch;
 
 	}
-
+//seguir - modificar
 	@RequestMapping("/seguir")
 	public ModelAndView seguir(@RequestParam("seguidor") String seguidor,
 			@RequestParam("seguido") String seguido)
@@ -97,9 +113,9 @@ public class UsuarioController {
 		return dispatch;
 
 	}
-	
-	// Dejar de seguir:
-	@RequestMapping("/DejarDeSeguir")
+
+	// Dejar de seguir - modificar
+	@RequestMapping("/dejardeseguir")
 	public ModelAndView dejarDeSeguir(
 			@RequestParam("seguidor") String seguidor,
 			@RequestParam("seguido") String seguido)
@@ -113,4 +129,17 @@ public class UsuarioController {
 		return dispatch;
 	}
 
+//perfil ajeno - modificar
+	@RequestMapping("/perfilajeno")
+	public ModelAndView perfilAjeno(String user)
+			
+			throws PersistenceException {
+		ModelAndView dispatch = null;
+		usuarioService.verPerfilAjeno(
+				usuarioService.getUsuarioByName(user);
+		dispatch = new ModelAndView("perfilajeno", "mensaje", "Ver perfil ajeno de"
+				+ user);
+		return dispatch;
+	}
+	
 }

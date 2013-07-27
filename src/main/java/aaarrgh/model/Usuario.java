@@ -1,7 +1,5 @@
 package aaarrgh.model;
 
-import java.util.List;
-
 public class Usuario {
 
 	private Integer iduser;
@@ -67,16 +65,6 @@ public class Usuario {
 
 	public void setValido(Boolean valido) {
 		this.valido = valido;
-	}
-
-	public List<Usuario> getSigue() {
-		
-		return null;
-	}
-
-	public List<Usuario> getSeguidores() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 
