@@ -44,10 +44,10 @@
 						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>
 					</div>
 					<div>
-						<a href="../usuario/seguidores.do" class="sigo">A quienes sigo</a>
+						<a href="../usuario/siguiendo.do" class="sigo">A quienes sigo</a>
 					</div>
 					<div>
-						<a href="../usuario/siguiendo.do" class="seguidores">Mis seguidores</a>
+						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
 					</div>
 				</div>
 				
