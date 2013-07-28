@@ -1,17 +1,15 @@
 package aaarrgh.controllers;
 
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import aaarrgh.model.Tweet;
@@ -61,6 +59,7 @@ public class TweetController extends HttpServlet {
 		// traigo todos los tweets de el user y de los que sigue
 		
 		List<Tweet> tweets = tweetService.getImproperios(usuarioSession.getId());
+		
 		String generaLista = null;
 		for (Tweet tweet : tweets) {
 			generaLista += tweet.getTweet()+"<br />";

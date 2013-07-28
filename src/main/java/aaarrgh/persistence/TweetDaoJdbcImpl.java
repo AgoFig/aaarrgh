@@ -14,6 +14,7 @@ public class TweetDaoJdbcImpl implements TweetDao{
 	public static TweetDao getInstance() {
 		return instance;
 	}
+	
 	@Override
 	public void insert(Tweet tweet) throws PersistenceException {
 
@@ -44,6 +45,7 @@ public class TweetDaoJdbcImpl implements TweetDao{
 		}
 	}
 
+/*
 	@Override
 	public void delete(Tweet tweet) throws PersistenceException {
 		Transaction tx = TransactionJdbcImpl.getInstance();
@@ -69,7 +71,8 @@ public class TweetDaoJdbcImpl implements TweetDao{
 			}
 		}
 	}
-
+*/
+/*
 	@Override
 	public void update(Tweet tweet) throws PersistenceException {
 		try {
@@ -85,7 +88,8 @@ public class TweetDaoJdbcImpl implements TweetDao{
 			throw new PersistenceException(sqlException);
 		}
 	}
-
+*/
+	
 	public List<Tweet> findAll() throws PersistenceException {
 		List<Tweet> lista = new LinkedList<Tweet>();
 		try {
@@ -101,6 +105,7 @@ public class TweetDaoJdbcImpl implements TweetDao{
 		}
 		return lista;
 	}
+	
 
 	@Override
 	public Tweet findById(Integer idtweet) throws PersistenceException {
@@ -133,6 +138,7 @@ public class TweetDaoJdbcImpl implements TweetDao{
 
 		return retorno;
 	}
+	
 	@Override
 	public List<Tweet> findAllFromUser(Integer idUser)
 			throws PersistenceException {

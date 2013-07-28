@@ -80,6 +80,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		}
 	}
 
+/*
 	@Override
 	public void update(Usuario usuario) throws PersistenceException {
 		try {
@@ -98,7 +99,8 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 			throw new PersistenceException(sqlException);
 		}
 	}
-
+*/
+	
 	public List<Usuario> findAll() throws PersistenceException {
 		List<Usuario> lista = new LinkedList<Usuario>();
 		try {

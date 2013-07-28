@@ -11,9 +11,4 @@ public class DaoFactory {
 		
 	}
 
-	public static PersonaDao getPersonaDao() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
