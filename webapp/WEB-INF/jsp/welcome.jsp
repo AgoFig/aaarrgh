@@ -53,6 +53,9 @@
 					<div>
 						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
 					</div>
+					<div>
+						<a href="../index.jsp" class="seguidores">Logout</a>
+					</div>
 				</div>
 				
 			</div>

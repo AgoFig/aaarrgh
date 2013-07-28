@@ -6,7 +6,7 @@
 <head>
 <title>Login</title>
 <link rel="stylesheet" type="text/css" href="css/style.css" />
-
+<script src="js/gen_validatorv4.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="login-wrapper">
@@ -25,7 +25,7 @@
 			<div class="logo">
 				<img alt="logo" src="img/logo.png">
 			</div>
-			<form action="login/auth.do" class="form-horizontal">
+			<form name="login1" id="login1" action="login/auth.do" class="form-horizontal" >
 				<div class="control-group">
 					<label class="control-label" for="inputUsername">Nombre de
 						usuario</label>
@@ -45,6 +45,11 @@
 					</div>
 				</div>
 			</form>
+			<script  type="text/javascript">
+ var frmvalidator = new Validator("login1");
+ frmvalidator.addValidation("user","req","Ingrese un nombre de usuario.");
+ frmvalidator.addValidation("pass","req","Ingrese un password.");
+</script>
 		</div>
 		<div class="pirata float-left grid50">
 			<img alt="pirata aaarrrgh" src="img/pirata.png">
