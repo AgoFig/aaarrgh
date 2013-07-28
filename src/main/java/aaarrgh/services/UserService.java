@@ -24,12 +24,35 @@ public class UserService {
 		return usuario;
 	}
 	
+
+
+	//devuelve los seguidores de ese usuario - cecilia
+	public List<Usuario> getSeguidores(Integer iduser) throws PersistenceException { 
+			
+		    UsuarioDao dao = DaoFactory.getUsuarioDao();		
+			List<Usuario> seguidores;
+			
+			 seguidores= dao.traerSeguidoresDeUnUsuario(iduser); //seguidores de ese usuario.Retorna el id
+			
+			return seguidores;		
+		}
+		
+	//devuelve los que estoy siguiendo(en desarrollo) - cecilia
+	public List <Usuario> getSigue(Integer iduser) throws PersistenceException{
+		UsuarioDao dao = DaoFactory.getUsuarioDao();
+		List<Usuario> siguiendo;
+		siguiendo=dao.traerLosQueEstoySiguiendo(iduser);
+		return siguiendo;
+	}
+	
+	//seguir usuario:
 	public boolean seguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) {
 		
 		return miUsuario.seguirUser(usuarioSeguidor);
 
 	}
 	
+	//dejar de seguir:
 	public boolean dejarDeSeguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) {
 		
 		List<Usuario> siguiendo = miUsuario.getSigue();
@@ -39,8 +62,14 @@ public class UserService {
 			return true;
 		} 
 		return false;
-
 	}
 
+//ver pefil ajeno:
+	public void verPerfilAjeno(Usuario usuarioByName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+   
 }
 	

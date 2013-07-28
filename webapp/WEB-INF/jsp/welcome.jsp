@@ -19,7 +19,11 @@
 					<div class="color blanco"></div>
 				</div>
 				<div class="logo float-left">
-					<img alt="logo" src="../img/logo.png">
+					<a href="../login/auth.do?user=<% 					    
+
+					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass"));
+					    
+					    %>"><img alt="logo" src="../img/logo.png"></a>
 				</div>
 				<div class="mini-pirata float-right">
 					<img alt="mini pirata" src="../img/mini-pirata.png">
@@ -44,10 +48,13 @@
 						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>
 					</div>
 					<div>
-						<a href="../usuario/seguidores.do" class="sigo">A quienes sigo</a>
+						<a href="../usuario/seguiendo.do" class="sigo">A quienes sigo</a>
 					</div>
 					<div>
-						<a href="../usuario/siguiendo.do" class="seguidores">Mis seguidores</a>
+						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
+					</div>
+					<div>
+						<a href="../index.jsp" class="seguidores">Logout</a>
 					</div>
 				</div>
 				
