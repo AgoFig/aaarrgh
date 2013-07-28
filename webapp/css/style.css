@@ -3,6 +3,9 @@
 /****************
      Globales
 ****************/
+
+img {border : 0;}
+
 .float-left {
 	float: left;
 }

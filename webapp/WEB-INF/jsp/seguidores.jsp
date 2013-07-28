@@ -18,7 +18,11 @@
 					<div class="color blanco"></div>
 				</div>
 				<div class="logo float-left">
-					<img alt="logo" src="../img/logo.png">
+					<a href="../login/auth.do?user=<% 					    
+
+					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass"));
+					    
+					    %>"><img alt="logo" src="../img/logo.png"></a>
 				</div>
 				<div class="mini-pirata float-right">
 					<img alt="mini pirata" src="../img/mini-pirata.png">
@@ -38,7 +42,11 @@
 				<div class="barra-lateral float-right rojo">
 					
 					<div>
-						<a href="../login/auth.do" class="miperfil">Ver Tweets</a>
+						<a href="../login/auth.do?user=<% 					    
+
+					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass"));
+					    
+					    %>" class="miperfil">Ver Tweets</a>
 					</div>
 					<div>
 						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>
