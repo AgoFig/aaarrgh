@@ -136,10 +136,30 @@ public class UsuarioController {
 			throws PersistenceException {
 		ModelAndView dispatch = null;
 		usuarioService.verPerfilAjeno(
-				usuarioService.getUsuarioByName(user);
+				usuarioService.getUsuarioByName(user));
 		dispatch = new ModelAndView("perfilajeno", "mensaje", "Ver perfil ajeno de"
 				+ user);
 		return dispatch;
 	}
+	
+//	@RequestMapping("/volverWelcome")
+//	public ModelAndView authenticate(
+//		HttpServletRequest request) throws PersistenceException {
+//			
+//	ModelAndView dispatch = null;
+//	HttpSession session = request.getSession(true);
+//	
+//	if (usuario.getValido()) {
+//		
+//		Usuario usuarioSession = new Usuario();
+//		usuarioSession = (Usuario) session.getAttribute("userObject");
+//		dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + usuarioSession.getUser()); 
+//	} else {
+//		dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
+//	}
+//
+//	return dispatch;
+//
+//}
 	
 }

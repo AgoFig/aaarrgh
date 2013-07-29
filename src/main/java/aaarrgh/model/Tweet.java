@@ -4,6 +4,15 @@ public class Tweet {
 	private Integer idtweet;
 	private String tweet;
 	private Integer iduser;
+	private String userName; // PAU
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public Tweet() {
 		super();

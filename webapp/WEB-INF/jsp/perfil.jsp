@@ -44,11 +44,7 @@
 				<div class="barra-lateral float-right rojo">
 					
 					<div>
-					    <a href="../login/auth.do?user=<% 					    
-
-					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass"));
-					    
-					    %>" class="miperfil">Ver Tweets</a>
+						<a href="../tweet/listar.do">Ver Tweets</a>
 					</div>
 					<div>
 						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>

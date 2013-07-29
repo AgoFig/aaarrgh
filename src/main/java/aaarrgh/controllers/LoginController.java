@@ -1,11 +1,9 @@
 package aaarrgh.controllers;
 
-import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -13,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import aaarrgh.model.Tweet;
 import aaarrgh.model.Usuario;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.services.LoginService;
+import aaarrgh.services.TweetService;
+
+/* BEGIN PAU */
 
 @Controller
 @RequestMapping("/login")
@@ -24,6 +26,7 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	LoginService loginService = new LoginService();
+	TweetService tweetService = new TweetService(); 
 
 		@RequestMapping("/auth")
 		public ModelAndView authenticate(
@@ -39,12 +42,19 @@ public class LoginController extends HttpServlet {
 			
 			HttpSession session = request.getSession(true);
 			session.setAttribute("userObject", usuario);
-			
-			//mapa con todo (HashMap)
-			
+
 			Usuario usuarioSession = new Usuario();
 			usuarioSession = (Usuario) session.getAttribute("userObject");
-			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + usuarioSession.getUser()); 
+		
+			List<Tweet> tweets = tweetService.getImproperios(usuarioSession.getId());
+			
+			if(!tweets.isEmpty()){
+				dispatch = new ModelAndView("welcome", "listadoTweet", tweets); 
+			}else{
+				
+				dispatch = new ModelAndView("welcome", "listadoTweet", "No hay tweets."); 
+			}
+			
 		} else {
 			dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
 		}
@@ -62,3 +72,5 @@ public class LoginController extends HttpServlet {
 	}
 
 }
+
+/* END PAU */

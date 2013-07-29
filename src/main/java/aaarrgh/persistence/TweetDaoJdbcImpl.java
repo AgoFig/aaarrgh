@@ -132,12 +132,13 @@ public class TweetDaoJdbcImpl implements TweetDao{
 	private Tweet convertOne(ResultSet resultSet) throws SQLException {
 		Tweet retorno = new Tweet();
 
-		retorno.setId(resultSet.getInt("id_tweet"));
+		retorno.setUserName(resultSet.getString("user"));
 		retorno.setTweet(resultSet.getString("tweet"));
-		retorno.setIduser(resultSet.getInt("id_user"));
 
 		return retorno;
 	}
+	
+	/* BEGIN PAU */
 	
 	@Override
 	public List<Tweet> findAllFromUser(Integer idUser)
@@ -145,9 +146,13 @@ public class TweetDaoJdbcImpl implements TweetDao{
 		List<Tweet> lista = new LinkedList<Tweet>();
 		try {
 			Connection c = ConnectionProvider.getInstance().getConnection();
-			String query = "select * from mensaje where id_user = ?";
+			String query = "select u.user, m.tweet from usuario as u, mensaje as m "+
+							"where u.id_user in (?, (select id_seguido from sigue where id_seguidor = ?)) "+
+							"and m.id_user = u.id_user "+
+							"order by m.id_tweet DESC";
 			PreparedStatement statement = c.prepareStatement(query);
 			statement.setInt(1, idUser);
+			statement.setInt(2, idUser);
 			ResultSet resultSet = statement.executeQuery();			
 			while (resultSet.next()) {
 				lista.add(convertOne(resultSet));
@@ -157,5 +162,7 @@ public class TweetDaoJdbcImpl implements TweetDao{
 		}
 		return lista;
 	}
+	
+	/* END PAU */
 
 }

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="aaarrgh.model.Usuario"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Arrays"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,11 +23,8 @@
 					<div class="color blanco"></div>
 				</div>
 				<div class="logo float-left">
-					<a href="../login/auth.do?user=<% 					    
-
-					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass"));
-					    
-					    %>"><img alt="logo" src="../img/logo.png"></a>
+					<a href="../login/auth.do?user=<%
+					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass")); %>"><img alt="logo" src="../img/logo.png"></a>
 				</div>
 				<div class="mini-pirata float-right">
 					<img alt="mini pirata" src="../img/mini-pirata.png">
@@ -34,13 +35,19 @@
 					<form action="../tweet/postear.do">
 						<input id="postear-twit" type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
 							type="submit" class="btn" value="Aaarrgh!"/>
-						<p class="float-right">${message}</p>
+							<% Usuario user =  (Usuario) session.getAttribute("userObject"); %>
+						<p class="float-right">Bienvenido @<%= user.getUser()%></p>
 					</form>
 				</div>
-				<div class="tweets float-left">
 				
-					<div class="lista-feed">${listadoTweet}</div>
-					<a href="../tweet/listar.do">Ver Tweets</a>
+				<div class="tweets float-left">
+					<c:forEach var="tweet" items="${listadoTweet}" >
+					
+						 ${tweet.userName} < br > 
+      					 ${tweet.tweet} < br > 
+					
+					</c:forEach>
+					
 				</div>
 				<div class="barra-lateral float-right rojo">
 

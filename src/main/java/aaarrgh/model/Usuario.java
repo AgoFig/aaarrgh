@@ -1,5 +1,7 @@
 package aaarrgh.model;
 
+import java.util.List;
+
 public class Usuario {
 
 	private Integer iduser;
@@ -84,6 +86,9 @@ public class Usuario {
 		return false;
 	}
 
-	
+	public List<Usuario> getSigue(){ // PAU
+		return null;
+		
+	}
 	
 }

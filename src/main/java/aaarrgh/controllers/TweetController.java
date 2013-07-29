@@ -47,6 +47,8 @@ public class TweetController extends HttpServlet {
 		return dispatch;
 
 	}
+	
+	/* BEGIN PAU */
 
 	@RequestMapping("/listar")
 	public ModelAndView verTweets(HttpServletRequest request) throws PersistenceException {
@@ -60,20 +62,17 @@ public class TweetController extends HttpServlet {
 		
 		List<Tweet> tweets = tweetService.getImproperios(usuarioSession.getId());
 		
-		String generaLista = null;
-		for (Tweet tweet : tweets) {
-			generaLista += tweet.getTweet()+"<br />";
-		}
-		
 		ModelAndView dispatch = null;
 		if (tweets.isEmpty()) {
 		dispatch = new ModelAndView("welcome", "listadoTweet", "No hay tweets."); 
 	} else {
-			dispatch = new ModelAndView("welcome", "listadoTweet", generaLista);
+			dispatch = new ModelAndView("welcome", "listadoTweet", tweets);
 		}
 
 		return dispatch;
 
 	}
+	
+	/* END PAU */
 
 }
