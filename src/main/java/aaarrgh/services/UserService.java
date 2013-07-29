@@ -26,22 +26,19 @@ public class UserService {
 	
 
 
-	//devuelve los seguidores de ese usuario - cecilia
+	//devuelve los seguidores de ese usuario:
 	public List<Usuario> getSeguidores(Integer iduser) throws PersistenceException { 
 			
 		    UsuarioDao dao = DaoFactory.getUsuarioDao();		
-			List<Usuario> seguidores;
-			
-			 seguidores= dao.traerSeguidoresDeUnUsuario(iduser); //seguidores de ese usuario.Retorna el id
+			List<Usuario> seguidores = dao.traerSeguidoresDeUnUsuario(iduser); 
 			
 			return seguidores;		
 		}
 		
-	//devuelve los que estoy siguiendo(en desarrollo) - cecilia
+	//devuelve los que estoy siguiendo:
 	public List <Usuario> getSigue(Integer iduser) throws PersistenceException{
 		UsuarioDao dao = DaoFactory.getUsuarioDao();
-		List<Usuario> siguiendo;
-		siguiendo=dao.traerLosQueEstoySiguiendo(iduser);
+		List<Usuario> siguiendo = dao.traerLosQueEstoySiguiendo(iduser);
 		return siguiendo;
 	}
 	

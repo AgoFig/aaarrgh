@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import aaarrgh.model.Usuario;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.services.UserService;
@@ -43,59 +44,65 @@ public class UsuarioController {
 
 	}
 
-	// Obtener sus seguidores - cecilia
+	// Obtener sus seguidores:
 	@RequestMapping("/seguidores")
 	public ModelAndView mostrarSeguidores(HttpServletRequest request)
 			throws PersistenceException {
 		
-		ModelAndView dispatch = null;
 		HttpSession session = request.getSession(true);
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
-		Usuario user = usuarioService.getUsuarioByName(usuarioSession.getUser());//busco al usuario que inicio sesion segun su user
+		List<Usuario> meSiguen = usuarioService.getSeguidores(usuarioSession.getId());//le mando el id del usuario registrado para que traiga seguidores 
 		
-		List<Usuario> meSiguen = usuarioService.getSeguidores(user.getId());//le mando el id de ese user para que traiga seguidores a una lista
-
-		String listaSeguidores = null;
+		String listaSeguidores = "Mis seguidores son:<br />";
 		for (Usuario usuario : meSiguen) {
-			listaSeguidores += " @" + usuario.getUser();//de getSeguidores obtengo los id's y aca estoy pidiendo los user's de los seguidores...¿?
+			listaSeguidores += " @" + usuario.getUser()+"<br />";//el getUser contiene los user`s de los seguidores
 		}
 
+		ModelAndView dispatch = null;
+		
 		if (meSiguen.isEmpty()) {
-			dispatch = new ModelAndView("seguidores", "listadoSeguidores",
+			dispatch = new ModelAndView("seguidores", "seguidores",
 					"No tiene seguidores");
 		} else {
-			dispatch = new ModelAndView("seguidores", "listadoSeguidores",
+			dispatch = new ModelAndView("seguidores", "seguidores",
 					listaSeguidores);
 		}
 
 		return dispatch;
-
 	}
-//Siguiendo (falta terminar) - cecilia
-	@RequestMapping("/siguiendo")
-	public ModelAndView mostrarSiguiendo(Usuario user)
-			throws PersistenceException {
+	
+	
+	//Obtener a los que esta siguiendo:
+		@RequestMapping("/siguiendo")
+		public ModelAndView mostrarSiguiendo(HttpServletRequest request)
+				throws PersistenceException {
 
-		List<Usuario> estoySiguiendo = user.getSigue();
+			HttpSession session = request.getSession(true);
+			Usuario usuarioSession = new Usuario();
+			usuarioSession = (Usuario) session.getAttribute("userObject");
 
-		String listaSiguiendo = null;
-		for (Usuario usuario : estoySiguiendo) {
-			listaSiguiendo += "@" + usuario.getUser();
+			List<Usuario> siguiendo = usuarioService.getSigue(usuarioSession
+					.getId());
+			String listaSiguiendo = "Estoy siguiendo a:<br />";
+			for (Usuario sigue : siguiendo) {
+				listaSiguiendo += "@" + sigue.getUser()+"<br />";
+			}
+
+			ModelAndView dispatch = null;
+			if (siguiendo.isEmpty()) {
+				dispatch = new ModelAndView("siguiendo", "siguiendo",
+						"No esta siguiendo a nadie");
+			} else {
+				dispatch = new ModelAndView("siguiendo", "siguiendo",
+						listaSiguiendo);
+			}
+
+			return dispatch;
+
 		}
 
-		ModelAndView dispatch = null;
-		if (estoySiguiendo.isEmpty()) {
-			dispatch = new ModelAndView("seguiendo", "listadoSiguiendo",
-					"No esta siguiendo a nadie");
-		} else {
-			dispatch = new ModelAndView("seguiendo", "listadoSiguiendo",
-					listaSiguiendo);
-		}
-
-		return dispatch;
-
-	}
+		
 //seguir - modificar
 	@RequestMapping("/seguir")
 	public ModelAndView seguir(@RequestParam("seguidor") String seguidor,

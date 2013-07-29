@@ -175,12 +175,33 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		return retorno;
 	}
 
-	//Traer los seguidores de un usuario - cecilia
+	//Traer los seguidores de un usuario:
 	
-		public List<Usuario> traerSeguidoresDeUnUsuario(Integer iduser) throws PersistenceException {
+			public List<Usuario> traerSeguidoresDeUnUsuario(Integer iduser) throws PersistenceException {
+				List<Usuario> lista = new LinkedList<Usuario>();
+				try {
+					String query = "select * from usuario inner join sigue on id_seguidor=id_user where id_seguido=?"; 
+				
+					PreparedStatement statement = ConnectionProvider.getInstance()
+							.getConnection().prepareStatement(query);
+					statement.setInt(1, iduser);
+					ResultSet resultSet = statement.executeQuery();
+					while (resultSet.next()) {
+						lista.add(convertOne(resultSet));
+					}
+				} catch (SQLException sqlException) {
+					throw new PersistenceException(sqlException);
+				}
+				return lista;
+			}
+			
+			//Traer a los que estoy siguiendo:
+			@Override
+			public List<Usuario> traerLosQueEstoySiguiendo(Integer iduser) throws PersistenceException{
 			List<Usuario> lista = new LinkedList<Usuario>();
 			try {
-				String query = "select id_seguidor from sigue where id_seguido=?"; //me trae el id del seguidor  
+				String query = "select * from usuario inner join sigue on id_seguido=id_user where id_seguidor=?"; 
+				
 				PreparedStatement statement = ConnectionProvider.getInstance()
 						.getConnection().prepareStatement(query);
 				statement.setInt(1, iduser);
@@ -192,27 +213,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 				throw new PersistenceException(sqlException);
 			}
 			return lista;
-		}
-
-		//Traer a los que estoy siguiendo(en desarrollo) - cecilia
-		@Override
-		public List<Usuario> traerLosQueEstoySiguiendo(Integer iduser) throws PersistenceException{
-		List<Usuario> lista = new LinkedList<Usuario>();
-		try {
-			String query = "select id_seguido from sigue where id_seguidor=?"; 
-			PreparedStatement statement = ConnectionProvider.getInstance()
-					.getConnection().prepareStatement(query);
-			statement.setInt(1, iduser);
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				lista.add(convertOne(resultSet));
 			}
-		} catch (SQLException sqlException) {
-			throw new PersistenceException(sqlException);
-		}
-		return lista;
-		}
-
 
 	}
 
