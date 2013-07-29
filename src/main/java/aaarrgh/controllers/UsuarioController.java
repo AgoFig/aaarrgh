@@ -86,7 +86,7 @@ public class UsuarioController {
 					.getId());
 			String listaSiguiendo = "Estoy siguiendo a:<br />";
 			for (Usuario sigue : siguiendo) {
-				listaSiguiendo += "@" + sigue.getUser()+"<br />";
+				listaSiguiendo += "@" + sigue.getUser()+"<a href='../usuario/dejardeseguir.do'>Dejar de Seguir</a><br />"; /*Ago*/
 			}
 
 			ModelAndView dispatch = null;
@@ -115,7 +115,7 @@ public class UsuarioController {
 				usuarioService.getUsuarioByName(seguido));
 
 		dispatch = new ModelAndView("siguiendo", "mensajeSiguiendo",
-				"Ahroa esta siguiendo a " + seguido);
+				"Ahora esta siguiendo a " + seguido);
 
 		return dispatch;
 

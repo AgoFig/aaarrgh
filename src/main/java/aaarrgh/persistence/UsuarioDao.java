@@ -25,5 +25,9 @@ public interface UsuarioDao {
     public List <Usuario> traerLosQueEstoySiguiendo(Integer iduser) throws PersistenceException;
     
 	public Usuario findByUser(String name) throws PersistenceException;
+
+	void seguir(Usuario fan, Usuario idolo) throws PersistenceException;
+
+	void dejarDeSeguir(Usuario fan, Usuario idolo) throws PersistenceException;
     
 }

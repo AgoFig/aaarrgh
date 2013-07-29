@@ -214,6 +214,60 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 			}
 			return lista;
 			}
+			
+			@Override
+			public void seguir(Usuario fan, Usuario idolo) throws PersistenceException {
+				Transaction tx = TransactionJdbcImpl.getInstance();
+				Connection conn = tx.getConnection();
+
+				try {
+					tx.begin();
+
+					String query = "insert into sigue (seguidor,sigue) values ( ?, ?)";
+					PreparedStatement statement = conn.prepareStatement(query);
+					statement.setInt(1, fan.getId());
+					statement.setInt(2, idolo.getId());
+					statement.executeUpdate();
+
+					tx.commit();
+
+				} catch (SQLException sqlException) {
+					throw new PersistenceException(sqlException);
+				} finally {
+					try {
+						conn.close();
+					} catch (SQLException sqlException) {
+						throw new PersistenceException(sqlException);
+					}
+				}
+			}
+			
+			@Override
+			public void dejarDeSeguir(Usuario fan, Usuario idolo) throws PersistenceException {
+				Transaction tx = TransactionJdbcImpl.getInstance();
+				Connection conn = tx.getConnection();
+
+				try {
+					tx.begin();
+
+					String query = "delete from sigue where seguidor = ? and sigue = ?";
+					PreparedStatement statement = conn.prepareStatement(query);
+					statement.setInt(1, fan.getId());
+					statement.setInt(2, idolo.getId());
+					statement.executeUpdate();
+
+					tx.commit();
+
+				} catch (SQLException sqlException) {
+					throw new PersistenceException(sqlException);
+				} finally {
+					try {
+						conn.close();
+					} catch (SQLException sqlException) {
+						throw new PersistenceException(sqlException);
+					}
+				}
+			}
 
 	}
 

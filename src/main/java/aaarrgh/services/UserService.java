@@ -43,23 +43,35 @@ public class UserService {
 	}
 	
 	//seguir usuario:
-	public boolean seguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) {
-		
-		return miUsuario.seguirUser(usuarioSeguidor);
+	public void seguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) throws PersistenceException {
+		UsuarioDao dao = DaoFactory.getUsuarioDao();
+		dao.seguir(miUsuario, usuarioSeguidor);		
 
 	}
 	
 	//dejar de seguir:
-	public boolean dejarDeSeguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) {
-		
-		List<Usuario> siguiendo = miUsuario.getSigue();
-		
-		if (siguiendo.contains(usuarioSeguidor)) {
-			siguiendo.remove(usuarioSeguidor);
-			return true;
-		} 
-		return false;
+	public void dejarDeSeguirUsuario(Usuario miUsuario,Usuario usuarioSeguidor) throws PersistenceException {
+		UsuarioDao dao = DaoFactory.getUsuarioDao();
+		dao.dejarDeSeguir(miUsuario, usuarioSeguidor);
 	}
+	
+	/*
+	public boolean seguirUser(Usuario usuarioSeguidor) { // Ago
+		boolean resultado = true;
+		for (Usuario user : siguiendo) {
+			if (usuarioSeguidor.equals(user)) {
+				resultado = false;
+				break;
+			}
+		}
+		this.siguiendo.add(usuarioSeguidor);
+		return resultado;
+	}
+
+	public boolean dejarDeSeguirUser(Usuario idolo) { // Ago
+		return this.siguiendo.remove(idolo);
+	}
+*/
 
 //ver pefil ajeno:
 	public void verPerfilAjeno(Usuario usuarioByName) {
