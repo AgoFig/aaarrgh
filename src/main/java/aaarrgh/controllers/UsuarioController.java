@@ -53,10 +53,23 @@ public class UsuarioController {
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		List<Usuario> meSiguen = usuarioService.getSeguidores(usuarioSession.getId());//le mando el id del usuario registrado para que traiga seguidores 
+		List<Usuario> estoySiguiendo =usuarioService.getSigue(usuarioSession.getId());
+		
+		
 		
 		String listaSeguidores = "Mis seguidores son:<br />";
 		for (Usuario usuario : meSiguen) {
-			listaSeguidores += " @" + usuario.getUser()+"<br />";//el getUser contiene los user`s de los seguidores
+			
+			/* No se esta entrando en este if y no se porque. -Ago */
+		if (estoySiguiendo.contains(usuario)) {
+			listaSeguidores += " @" + usuario.getUser()+" "+"<a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'>Dejar de Seguir</a><br />"; /*Ago*///el getUser contiene los user`s de los seguidores
+			
+		}
+		else {
+			listaSeguidores += " @" + usuario.getUser()+" "+"<a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'>Seguir</a><br />"; /*Ago*///el getUser contiene los user`s de los seguidores
+			
+		}
+		
 		}
 
 		ModelAndView dispatch = null;
@@ -86,7 +99,7 @@ public class UsuarioController {
 					.getId());
 			String listaSiguiendo = "Estoy siguiendo a:<br />";
 			for (Usuario sigue : siguiendo) {
-				listaSiguiendo += "@" + sigue.getUser()+"<a href='../usuario/dejardeseguir.do'>Dejar de Seguir</a><br />"; /*Ago*/
+				listaSiguiendo += "@" + sigue.getUser()+"  <a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'>Dejar de Seguir</a><br />"; /*Ago*/
 			}
 
 			ModelAndView dispatch = null;
@@ -110,9 +123,10 @@ public class UsuarioController {
 			throws PersistenceException {
 
 		ModelAndView dispatch = null;
-
-		usuarioService.seguirUsuario(usuarioService.getUsuarioByName(seguidor),
-				usuarioService.getUsuarioByName(seguido));
+		Usuario usuarioSeguidor = usuarioService.getUsuarioByName(seguidor);
+		Usuario usuarioSeguido = usuarioService.getUsuarioByName(seguido);
+		
+		usuarioService.seguirUsuario(usuarioSeguidor,usuarioSeguido);
 
 		dispatch = new ModelAndView("siguiendo", "mensajeSiguiendo",
 				"Ahora esta siguiendo a " + seguido);
@@ -131,7 +145,7 @@ public class UsuarioController {
 		usuarioService.dejarDeSeguirUsuario(
 				usuarioService.getUsuarioByName(seguidor),
 				usuarioService.getUsuarioByName(seguido));
-		dispatch = new ModelAndView("siguiendo", "mensaje", "Dejo de seguir a"
+		dispatch = new ModelAndView("siguiendo", "mensaje", "Dejo de seguir a "
 				+ seguido);
 		return dispatch;
 	}

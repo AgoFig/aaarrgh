@@ -223,7 +223,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 				try {
 					tx.begin();
 
-					String query = "insert into sigue (seguidor,sigue) values ( ?, ?)";
+					String query = "insert into sigue (id_seguidor,id_seguido) values ( ?, ?)";
 					PreparedStatement statement = conn.prepareStatement(query);
 					statement.setInt(1, fan.getId());
 					statement.setInt(2, idolo.getId());
@@ -250,7 +250,7 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 				try {
 					tx.begin();
 
-					String query = "delete from sigue where seguidor = ? and sigue = ?";
+					String query = "delete from sigue where id_seguidor = ? and id_seguido = ?";
 					PreparedStatement statement = conn.prepareStatement(query);
 					statement.setInt(1, fan.getId());
 					statement.setInt(2, idolo.getId());
