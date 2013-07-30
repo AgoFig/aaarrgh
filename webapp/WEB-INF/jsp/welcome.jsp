@@ -51,7 +51,7 @@
 						</c:forEach>
 			        </c:when>
 			        <c:otherwise>
-			           <p class="float-right">${message}</p>
+			           <p class="float-left">${message}</p>
 			        </c:otherwise>
 			    </c:choose>					
 				</div>	
