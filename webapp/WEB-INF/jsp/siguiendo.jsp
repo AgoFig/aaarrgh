@@ -5,6 +5,12 @@
 <head>
 <title>Siguiendo</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+<!-- jQuery -->
+<link href="../css/blitzer/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<script src="../js/jquery-1.9.1.js"></script>
+<script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+	
 </head>
 <body>
 	<div id="welcome-wrapper ">
@@ -28,7 +34,7 @@
 					<img alt="mini pirata" src="../img/mini-pirata.png">
 				</div>
 			</div>
-			<div class="contenido clear">
+			<div class="contenido clear rojo">
 				<div class="barra-postear rojo">
 					<form class="hidden" action="../tweet/postear.do">
 						<input id="postear-twit" type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input

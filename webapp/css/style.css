@@ -124,6 +124,10 @@ body {
 	font-size: 1.2em;
 }
 
+.barra-postear {
+	width:100%;
+}
+
 .barra-postear p {
 	color: white;
 	text-decoration: none;
@@ -145,7 +149,17 @@ body {
 	text-align: right;
 }
 
+.user {
+	margin-top: 3px;
+}
 
+.user a {
+	font-style: sans-serif;
+	font-size: 10px;
+	color: #B80A01;
+	text-decoration: none;
+	line-height: 16px;
+}
 
 #postear-twit {
 	height: 80px;

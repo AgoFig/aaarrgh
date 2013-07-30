@@ -53,7 +53,7 @@ public class UsuarioController {
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		List<Usuario> meSiguen = usuarioService.getSeguidores(usuarioSession.getId());//le mando el id del usuario registrado para que traiga seguidores 
-		List<Usuario> estoySiguiendo =usuarioService.getSigue(usuarioSession.getId());
+		List<Usuario> estoySiguiendo = usuarioService.getSigue(usuarioSession.getId());
 		
 		
 		
@@ -62,11 +62,11 @@ public class UsuarioController {
 			
 			/* No se esta entrando en este if y no se porque. -Ago */
 		if (estoySiguiendo.contains(usuario)) {
-			listaSeguidores += " @" + usuario.getUser()+" "+"<a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'>Dejar de Seguir</a><br />"; /*Ago*///el getUser contiene los user`s de los seguidores
+			listaSeguidores += "<div class='user clear'><span class='float-left'>@" + usuario.getUser()+" "+"</span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'>Dejar de seguir</span></a></div>"; /*Ago*///el getUser contiene los user`s de los seguidores
 			
 		}
 		else {
-			listaSeguidores += " @" + usuario.getUser()+" "+"<a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'>Seguir</a><br />"; /*Ago*///el getUser contiene los user`s de los seguidores
+			listaSeguidores += "<div class='user clear'><span class='float-left'>@" + usuario.getUser()+" "+"</span><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>"; /*Ago*///el getUser contiene los user`s de los seguidores
 			
 		}
 		
@@ -99,7 +99,7 @@ public class UsuarioController {
 					.getId());
 			String listaSiguiendo = "Estoy siguiendo a:<br />";
 			for (Usuario sigue : siguiendo) {
-				listaSiguiendo += "@" + sigue.getUser()+"  <a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'>Dejar de Seguir</a><br />"; /*Ago*/
+				listaSiguiendo += "<div class='user clear'><span class='float-left'>@" + sigue.getUser()+" </span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>"; /*Ago*/
 			}
 
 			ModelAndView dispatch = null;
