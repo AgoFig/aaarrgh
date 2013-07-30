@@ -37,9 +37,10 @@ public class TweetController extends HttpServlet {
 		Tweet tweet = new Tweet();
 		tweet.setTweet(comentario);
 		tweet.setIduser( usuarioSession.getId());
-		
-		if (tweetService.insertTweet(tweet)) {
-			dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + usuarioSession.getUser()); 
+		tweetService.insertTweet(tweet);
+		List<Tweet> tweets = tweetService.getImproperios(usuarioSession.getId());
+		if(!tweets.isEmpty()){
+				dispatch = new ModelAndView("welcome", "listadoTweet", tweets); 
 		} else {
 			dispatch = new ModelAndView("welcome", "message", "Ingreso incorrecto" + usuarioSession.getUser());
 		}

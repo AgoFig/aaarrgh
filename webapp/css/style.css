@@ -105,7 +105,7 @@ body {
 
 .tweets {
 	width: 500px;
-	height: 100px;
+	height: 60px;
 	margin: 20px;
 }
 
@@ -168,4 +168,18 @@ body {
 
 .btn:hover {
 	background-color: orange;
+}
+		
+.line {
+	border-bottom-style:ridge;
+	padding-bottom:10px;
+	text-align:right;
+}
+
+.label {
+	font-weight:bold;
+}
+
+.perfil-data{
+	padding-bottom:10px;
 }

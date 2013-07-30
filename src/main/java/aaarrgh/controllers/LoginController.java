@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
 				dispatch = new ModelAndView("welcome", "listadoTweet", tweets); 
 			}else{
 				
-				dispatch = new ModelAndView("welcome", "listadoTweet", "No hay tweets."); 
+				dispatch = new ModelAndView("welcome", "message", "No hay tweets!"); 
 			}
 			
 		} else {

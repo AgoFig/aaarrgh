@@ -33,14 +33,11 @@ public class UsuarioController {
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		Usuario user = usuarioService
 				.getUsuarioByName(usuarioSession.getUser());
-		/* END PAU */
-
-		String perfil = null;
-		perfil = user.getFullName() + user.getMail();
-
-		dispatch = new ModelAndView("perfil", "perfil", perfil);
+		
+		dispatch = new ModelAndView("perfil", "usuario", user);
 
 		return dispatch;
+		/* END PAU */
 
 	}
 

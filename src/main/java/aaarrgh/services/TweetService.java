@@ -1,5 +1,6 @@
 package aaarrgh.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import aaarrgh.model.Tweet;
@@ -39,7 +40,7 @@ public class TweetService {
 	public List<Tweet> getImproperios(Integer idUser) throws PersistenceException { // esto cambia el String por un int ya que el metodo requiere in INT
 		
 		TweetDao dao = DaoFactory.getTweetDao();		
-		List<Tweet> tweets;
+		List<Tweet> tweets = new ArrayList<Tweet>();
 		
 		 tweets= dao.findAllFromUser(idUser); 
 		
