@@ -39,15 +39,17 @@
 					</form>
 				</div>
 				<div class="tweets float-left">
-					<div class="lista-feed">${perfil}</div>
+					<div class="perfil-data">
+						<label class="label">Nombre: </label> ${usuario.getFullName()} 
+					</div>
+					<div class="perfil-data">
+						<label class="label">E-mail: </label> ${usuario.mail} 
+					</div>
 				</div>
 				<div class="barra-lateral float-right rojo">
 					
 					<div>
 						<a href="../tweet/listar.do">Ver Tweets</a>
-					</div>
-					<div>
-						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>
 					</div>
 					<div>
 						<a href="../usuario/siguiendo.do" class="sigo">A quienes sigo</a>

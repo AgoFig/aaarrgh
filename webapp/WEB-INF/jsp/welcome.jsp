@@ -40,15 +40,22 @@
 					</form>
 				</div>
 				
-				<div class="tweets float-left">
-					<c:forEach var="tweet" items="${listadoTweet}" >
+				
+				<c:choose>
+			        <c:when test="${ not empty listadoTweet}">
+			            <c:forEach var="tweet" items="${listadoTweet}" >
+							<div class="tweets float-left">
+								<p>${tweet.tweet}</p>
+						 		<p class="line">@ ${tweet.userName}</p> 
+      					 	</div>
+						</c:forEach>
+			        </c:when>
+			        <c:otherwise>
+			           <p class="float-right">${message}</p>
+			        </c:otherwise>
+			    </c:choose>					
 					
-						 ${tweet.userName} < br > 
-      					 ${tweet.tweet} < br > 
-					
-					</c:forEach>
-					
-				</div>
+				
 				<div class="barra-lateral float-right rojo">
 
 					<div>
