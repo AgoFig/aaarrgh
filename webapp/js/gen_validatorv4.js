@@ -583,7 +583,7 @@ function TestComparison(objValue, strCompareElement, strvalidator, strError)
     if (!objValue.form)
     {
         sfm_show_error_msg("Error: No Form object!", objValue);
-        return false
+        return false;
     }
     objCompare = objValue.form.elements[strCompareElement];
     if (!objCompare)
@@ -1085,19 +1085,19 @@ function validateInput(strValidateStr, objValue, strError)
     case "req":
     case "required":
         {
-            ret = TestRequiredInput(objValue, strError)
+            ret = TestRequiredInput(objValue, strError);
             break;
         }
     case "maxlength":
     case "maxlen":
         {
-            ret = TestMaxLen(objValue, cmdvalue, strError)
+            ret = TestMaxLen(objValue, cmdvalue, strError);
             break;
         }
     case "minlength":
     case "minlen":
         {
-            ret = TestMinLen(objValue, cmdvalue, strError)
+            ret = TestMinLen(objValue, cmdvalue, strError);
             break;
         }
     case "alnum":
@@ -1160,17 +1160,17 @@ function validateInput(strValidateStr, objValue, strError)
         }
     case "dontselect":
         {
-            ret = TestDontSelect(objValue, cmdvalue, strError)
+            ret = TestDontSelect(objValue, cmdvalue, strError);
             break;
         }
     case "dontselectchk":
         {
-            ret = TestDontSelectChk(objValue, cmdvalue, strError)
+            ret = TestDontSelectChk(objValue, cmdvalue, strError);
             break;
         }
     case "shouldselchk":
         {
-            ret = TestShouldSelectChk(objValue, cmdvalue, strError)
+            ret = TestShouldSelectChk(objValue, cmdvalue, strError);
             break;
         }
     case "selmin":

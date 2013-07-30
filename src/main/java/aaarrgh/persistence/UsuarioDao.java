@@ -18,12 +18,16 @@ public interface UsuarioDao {
 
 //	public List<Tweet> traerTweetsDeQuienesSigo(Integer id);
 
-    //me tiene que traer los seguidores de un user - cecilia
+    //me tiene que traer los seguidores de un user:
     public List<Usuario> traerSeguidoresDeUnUsuario(Integer iduser) throws PersistenceException;
     
-    //me tiene que traer los usuarios que estoy siguiendo - cecilia
+    //me tiene que traer los usuarios que estoy siguiendo:
     public List <Usuario> traerLosQueEstoySiguiendo(Integer iduser) throws PersistenceException;
     
 	public Usuario findByUser(String name) throws PersistenceException;
+
+	void seguir(Usuario fan, Usuario idolo) throws PersistenceException;
+
+	void dejarDeSeguir(Usuario fan, Usuario idolo) throws PersistenceException;
     
 }

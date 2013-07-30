@@ -37,7 +37,7 @@
 					</form>
 				</div>
 				<div class="tweets float-left">
-					<div class="lista-feed">${siguiendo}</div>
+					<div class="lista-feed">${mensaje} ${mensajeSiguiendo} ${siguiendo}</div>
 				</div>
 				<div class="barra-lateral float-right rojo">
 					

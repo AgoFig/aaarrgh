@@ -175,12 +175,33 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 		return retorno;
 	}
 
-	//Traer los seguidores de un usuario - cecilia
+	//Traer los seguidores de un usuario:
 	
-		public List<Usuario> traerSeguidoresDeUnUsuario(Integer iduser) throws PersistenceException {
+			public List<Usuario> traerSeguidoresDeUnUsuario(Integer iduser) throws PersistenceException {
+				List<Usuario> lista = new LinkedList<Usuario>();
+				try {
+					String query = "select * from usuario inner join sigue on id_seguidor=id_user where id_seguido=?"; 
+				
+					PreparedStatement statement = ConnectionProvider.getInstance()
+							.getConnection().prepareStatement(query);
+					statement.setInt(1, iduser);
+					ResultSet resultSet = statement.executeQuery();
+					while (resultSet.next()) {
+						lista.add(convertOne(resultSet));
+					}
+				} catch (SQLException sqlException) {
+					throw new PersistenceException(sqlException);
+				}
+				return lista;
+			}
+			
+			//Traer a los que estoy siguiendo:
+			@Override
+			public List<Usuario> traerLosQueEstoySiguiendo(Integer iduser) throws PersistenceException{
 			List<Usuario> lista = new LinkedList<Usuario>();
 			try {
-				String query = "select id_seguidor from sigue where id_seguido=?"; //me trae el id del seguidor  
+				String query = "select * from usuario inner join sigue on id_seguido=id_user where id_seguidor=?"; 
+				
 				PreparedStatement statement = ConnectionProvider.getInstance()
 						.getConnection().prepareStatement(query);
 				statement.setInt(1, iduser);
@@ -192,27 +213,61 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 				throw new PersistenceException(sqlException);
 			}
 			return lista;
-		}
-
-		//Traer a los que estoy siguiendo(en desarrollo) - cecilia
-		@Override
-		public List<Usuario> traerLosQueEstoySiguiendo(Integer iduser) throws PersistenceException{
-		List<Usuario> lista = new LinkedList<Usuario>();
-		try {
-			String query = "select id_seguido from sigue where id_seguidor=?"; 
-			PreparedStatement statement = ConnectionProvider.getInstance()
-					.getConnection().prepareStatement(query);
-			statement.setInt(1, iduser);
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				lista.add(convertOne(resultSet));
 			}
-		} catch (SQLException sqlException) {
-			throw new PersistenceException(sqlException);
-		}
-		return lista;
-		}
+			
+			@Override
+			public void seguir(Usuario fan, Usuario idolo) throws PersistenceException {
+				Transaction tx = TransactionJdbcImpl.getInstance();
+				Connection conn = tx.getConnection();
 
+				try {
+					tx.begin();
+
+					String query = "insert into sigue (id_seguidor,id_seguido) values ( ?, ?)";
+					PreparedStatement statement = conn.prepareStatement(query);
+					statement.setInt(1, fan.getId());
+					statement.setInt(2, idolo.getId());
+					statement.executeUpdate();
+
+					tx.commit();
+
+				} catch (SQLException sqlException) {
+					throw new PersistenceException(sqlException);
+				} finally {
+					try {
+						conn.close();
+					} catch (SQLException sqlException) {
+						throw new PersistenceException(sqlException);
+					}
+				}
+			}
+			
+			@Override
+			public void dejarDeSeguir(Usuario fan, Usuario idolo) throws PersistenceException {
+				Transaction tx = TransactionJdbcImpl.getInstance();
+				Connection conn = tx.getConnection();
+
+				try {
+					tx.begin();
+
+					String query = "delete from sigue where id_seguidor = ? and id_seguido = ?";
+					PreparedStatement statement = conn.prepareStatement(query);
+					statement.setInt(1, fan.getId());
+					statement.setInt(2, idolo.getId());
+					statement.executeUpdate();
+
+					tx.commit();
+
+				} catch (SQLException sqlException) {
+					throw new PersistenceException(sqlException);
+				} finally {
+					try {
+						conn.close();
+					} catch (SQLException sqlException) {
+						throw new PersistenceException(sqlException);
+					}
+				}
+			}
 
 	}
 
