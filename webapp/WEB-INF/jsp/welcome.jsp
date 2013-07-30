@@ -40,7 +40,7 @@
 					</form>
 				</div>
 				
-				
+				<div class="tweets float-left">
 				<c:choose>
 			        <c:when test="${ not empty listadoTweet}">
 			            <c:forEach var="tweet" items="${listadoTweet}" >
@@ -54,7 +54,7 @@
 			           <p class="float-right">${message}</p>
 			        </c:otherwise>
 			    </c:choose>					
-					
+				</div>	
 				
 				<div class="barra-lateral float-right rojo">
 
