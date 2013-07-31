@@ -64,7 +64,7 @@
 						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
 					</div>
 					<div>
-					<a href="../usuario/ajeno.do" class="ajeno">Perfil ajeno</a>
+					<a href="../usuario/ajeno.do" class="ajeno">Usuarios sugeridos</a>
 					</div>
 					<div>
 						<a href="../index.jsp" class="seguidores">Logout</a>

@@ -5,6 +5,11 @@
 <head>
 <title>Perfil ajeno</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+<!-- jQuery -->
+<link href="../css/blitzer/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+<script src="../js/jquery-1.9.1.js"></script>
+<script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
 </head>
 <body>
 	<div id="welcome-wrapper ">
@@ -56,9 +61,6 @@
 					</div>
 					<div>
 						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
-					</div>
-					<div>
-					<a href="../usuario/ajeno.do" class="ajeno">Perfil ajeno</a>
 					</div>
 					<div>
 						<a href="../index.jsp" class="seguidores">Logout</a>

@@ -157,10 +157,10 @@ public class UsuarioController {
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		List<Usuario> similares = usuarioService.getSimilares(usuarioSession.getId());
-		String listaSimilares = "Usuarios registrados:<br />";
+		String listaSimilares = "<h2>Usuarios que podr&iacute;as seguir:</h2>";
 		for (Usuario similar : similares) {
 			
-			listaSimilares +="<div class='user clear'><span class='float-left'> @" + similar.getUser()+" "+"</span><a href='../usuario/verperfil.do?perfila="+similar.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Ver perfil</a></div>"+ "<br />"; 
+			listaSimilares +="<div class='user clear'><span class='float-left'> @" + similar.getUser()+" "+"</span><a href='../usuario/verperfil.do?perfila="+similar.getUser()+"'><span class='ui-icon ui-icon-person float-left'></span>Ver perfil</a></div>"+ "<br />"; 
 			}
 		if (similares.isEmpty()) {
 			dispatch = new ModelAndView("ajeno", "ajeno",
@@ -175,15 +175,19 @@ public class UsuarioController {
 	
 	// Mostrar perfil de un unico usuario 
 	@RequestMapping("/verperfil")
-	public ModelAndView mostrarperfil(@RequestParam("perfila") String perfila)
+	public ModelAndView mostrarperfil(@RequestParam("perfila") String perfila, HttpServletRequest request)
 			throws PersistenceException {
 
 		ModelAndView dispatch = null;
+		HttpSession session = request.getSession(true);
+		Usuario usuarioSession = new Usuario();
+		usuarioSession = (Usuario) session.getAttribute("userObject");
 		Usuario usuario = usuarioService.getUsuarioByName(perfila);
 		String perfilajeno = "Perfil del usuario seleccionado:<br />";
 		perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
 				+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
-				+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />";
+				+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />"
+				+"<div class='user clear'><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>";
 
 		dispatch = new ModelAndView("ajeno", "ajeno", perfilajeno);
 		return dispatch;

@@ -158,7 +158,12 @@ body {
 	font-size: 10px;
 	color: #B80A01;
 	text-decoration: none;
-	line-height: 16px;
+	line-height: 22px;
+}
+
+.ui-icon{
+	margin-left:10px;
+	margin-top: 3px;
 }
 
 #postear-twit {
