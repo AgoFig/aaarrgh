@@ -3,14 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Siguiendo</title>
+<title>Perfil ajeno</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 
 <!-- jQuery -->
 <link href="../css/blitzer/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 <script src="../js/jquery-1.9.1.js"></script>
 <script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
-	
 </head>
 <body>
 	<div id="welcome-wrapper ">
@@ -34,7 +33,7 @@
 					<img alt="mini pirata" src="../img/mini-pirata.png">
 				</div>
 			</div>
-			<div class="contenido clear rojo">
+			<div class="contenido clear">
 				<div class="barra-postear rojo">
 					<form class="hidden" action="../tweet/postear.do">
 						<input id="postear-twit" type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
@@ -43,7 +42,7 @@
 					</form>
 				</div>
 				<div class="tweets float-left">
-					<div class="lista-feed">${mensaje} ${mensajeSiguiendo} ${siguiendo}</div>
+					<div class="lista-feed">${ajeno}</div>
 				</div>
 				<div class="barra-lateral float-right rojo">
 					
@@ -62,9 +61,6 @@
 					</div>
 					<div>
 						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
-					</div>
-					<div>
-					<a href="../usuario/ajeno.do" class="ajeno">Usuarios sugeridos</a>
 					</div>
 					<div>
 						<a href="../index.jsp" class="seguidores">Logout</a>

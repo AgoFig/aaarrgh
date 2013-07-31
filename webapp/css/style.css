@@ -124,6 +124,10 @@ body {
 	font-size: 1.2em;
 }
 
+.barra-postear {
+	width:100%;
+}
+
 .barra-postear p {
 	color: white;
 	text-decoration: none;
@@ -143,6 +147,23 @@ body {
 .mini-pirata {
 	width: 300px;
 	text-align: right;
+}
+
+.user {
+	margin-top: 3px;
+}
+
+.user a {
+	font-style: sans-serif;
+	font-size: 10px;
+	color: #B80A01;
+	text-decoration: none;
+	line-height: 22px;
+}
+
+.ui-icon{
+	margin-left:10px;
+	margin-top: 3px;
 }
 
 #postear-twit {
@@ -166,4 +187,10 @@ body {
 
 .perfil-data{
 	padding-bottom:10px;
+}
+
+#listado {
+	height: 480px;
+	width:550px;
+	overflow: auto;
 }

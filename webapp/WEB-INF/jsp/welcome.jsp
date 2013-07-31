@@ -23,24 +23,30 @@
 					<div class="color blanco"></div>
 				</div>
 				<div class="logo float-left">
-					<a href="../login/auth.do?user=<%
-					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass")); %>"><img alt="logo" src="../img/logo.png"></a>
+					<a href="../tweet/listar.do"><img alt="logo" src="../img/logo.png"></a>
 				</div>
 				<div class="mini-pirata float-right">
 					<img alt="mini pirata" src="../img/mini-pirata.png">
 				</div>
 			</div>
-			<div class="contenido clear">
+			
+			<div class="contenido clear rojo">
 				<div class="barra-postear rojo">
 					<form action="../tweet/postear.do">
-						<input id="postear-twit" type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
-							type="submit" class="btn" value="Aaarrgh!"/>
+							
+							<textarea id="postear-twit" name="comentario" onfocus="if(this.value == '¿Que hay de nuevo marinero?') { this.value = ''; }" 
+							onblur="if (this.value == '') { this.value='¿Que hay de nuevo marinero?'; }" maxlength="140" style="resize:none;" >¿Que hay de nuevo marinero?</textarea>	
+							
+							<input type="submit" class="btn" value="Aaarrgh!"/>					
+							
+							
+							
 							<% Usuario user =  (Usuario) session.getAttribute("userObject"); %>
 						<p class="float-right">Bienvenido @<%= user.getUser()%></p>
 					</form>
 				</div>
 				
-				<div class="tweets float-left">
+				<div id="listado" class="tweets float-left">
 				<c:choose>
 			        <c:when test="${ not empty listadoTweet}">
 			            <c:forEach var="tweet" items="${listadoTweet}" >
@@ -68,10 +74,14 @@
 						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
 					</div>
 					<div>
+					<a href="../usuario/ajeno.do" class="ajeno">Usuarios sugeridos</a>
+					</div>
+					<div>
 						<a href="../index.jsp" class="seguidores">Logout</a>
 					</div>
 				</div>
 				
+			
 			</div>
 		</div>
 	</div>
