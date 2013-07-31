@@ -46,10 +46,10 @@
 				</div>
 			</form>
 			<script  type="text/javascript">
- var frmvalidator = new Validator("login1");
- frmvalidator.addValidation("user","req","Ingrese un nombre de usuario.");
- frmvalidator.addValidation("pass","req","Ingrese un password.");
-</script>
+				 var frmvalidator = new Validator("login1");
+				 frmvalidator.addValidation("user","req","Ingrese un nombre de usuario.");
+				 frmvalidator.addValidation("password","req","Ingrese un password.");
+			</script>
 		</div>
 		<div class="pirata float-left grid50">
 			<img alt="pirata aaarrrgh" src="img/pirata.png">
