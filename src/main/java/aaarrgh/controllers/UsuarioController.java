@@ -147,16 +147,45 @@ public class UsuarioController {
 		return dispatch;
 	}
 
-//perfil ajeno - modificar
-	@RequestMapping("/perfilajeno")
-	public ModelAndView perfilAjeno(String user)
-			
+	//perfil ajeno - cecilia
+	@RequestMapping("/ajeno")
+	public ModelAndView perfilAjeno(HttpServletRequest request)
 			throws PersistenceException {
+		
 		ModelAndView dispatch = null;
-		usuarioService.verPerfilAjeno(
-				usuarioService.getUsuarioByName(user));
-		dispatch = new ModelAndView("perfilajeno", "mensaje", "Ver perfil ajeno de"
-				+ user);
+		HttpSession session = request.getSession(true);
+		Usuario usuarioSession = new Usuario();
+		usuarioSession = (Usuario) session.getAttribute("userObject");
+		List<Usuario> similares = usuarioService.getSimilares(usuarioSession.getId());
+		String listaSimilares = "Usuarios registrados:<br />";
+		for (Usuario similar : similares) {
+			
+			listaSimilares +="<div class='user clear'><span class='float-left'> @" + similar.getUser()+" "+"</span><a href='../usuario/verperfil.do?perfila="+similar.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Ver perfil</a></div>"+ "<br />"; 
+			}
+		if (similares.isEmpty()) {
+			dispatch = new ModelAndView("ajeno", "ajeno",
+					"No hay usuarios registrados");
+		} else {
+			dispatch = new ModelAndView("ajeno", "ajeno",
+					listaSimilares);
+		}
+		return dispatch;
+	}
+	
+	
+	// Mostrar perfil de un unico usuario 
+	@RequestMapping("/verperfil")
+	public ModelAndView mostrarperfil(@RequestParam("perfila") String perfila)
+			throws PersistenceException {
+
+		ModelAndView dispatch = null;
+		Usuario usuario = usuarioService.getUsuarioByName(perfila);
+		String perfilajeno = "Perfil del usuario seleccionado:<br />";
+		perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
+				+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
+				+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />";
+
+		dispatch = new ModelAndView("ajeno", "ajeno", perfilajeno);
 		return dispatch;
 	}
 	
