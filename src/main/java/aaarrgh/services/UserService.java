@@ -55,6 +55,13 @@ public class UserService {
 		dao.dejarDeSeguir(miUsuario, usuarioSeguidor);
 	}
 	
+	//ver pefil ajeno
+	public List <Usuario> getSimilares(Integer iduser) throws PersistenceException{
+		UsuarioDao dao = DaoFactory.getUsuarioDao();
+		List<Usuario> similares = dao.findByUsuarios(iduser);
+		return similares;
+	}
+	
 	/*
 	public boolean seguirUser(Usuario usuarioSeguidor) { // Ago
 		boolean resultado = true;
@@ -72,13 +79,6 @@ public class UserService {
 		return this.siguiendo.remove(idolo);
 	}
 */
-
-//ver pefil ajeno:
-	public void verPerfilAjeno(Usuario usuarioByName) {
-		// TODO Auto-generated method stub
-		
-	}
-
    
 }
 	

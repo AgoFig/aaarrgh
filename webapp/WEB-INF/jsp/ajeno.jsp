@@ -3,14 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Seguidores</title>
+<title>Perfil ajeno</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
-
-<!-- jQuery -->
-<link href="../css/blitzer/jquery-ui-1.10.3.custom.css" rel="stylesheet">
-<script src="../js/jquery-1.9.1.js"></script>
-<script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
-
 </head>
 <body>
 	<div id="welcome-wrapper ">
@@ -43,7 +37,7 @@
 					</form>
 				</div>
 				<div class="tweets float-left">
-					<div class="lista-feed">${seguidores}</div>
+					<div class="lista-feed">${ajeno}</div>
 				</div>
 				<div class="barra-lateral float-right rojo">
 					

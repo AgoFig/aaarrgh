@@ -268,7 +268,25 @@ public class UsuarioDaoJdbcImpl implements UsuarioDao {
 					}
 				}
 			}
+			//perfil ajeno 
+			public List<Usuario> findByUsuarios(Integer iduser) throws PersistenceException {
+				List<Usuario> lista = new LinkedList<Usuario>();
+				try {
+					String query = "select * from usuario where id_user <> ?";
+					PreparedStatement statement = ConnectionProvider.getInstance()
+							.getConnection().prepareStatement(query);
+					statement.setInt(1, iduser);
+					ResultSet resultSet = statement.executeQuery();
+					while (resultSet.next()) {
+						lista.add(convertOne(resultSet));
+					}
+				} catch (SQLException sqlException) {
+					throw new PersistenceException(sqlException);
+				}
+				return lista;
+			}
+	}	
 
-	}
+
 
 
