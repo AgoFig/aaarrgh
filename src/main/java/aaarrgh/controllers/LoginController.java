@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
 			}
 			
 		} else {
-			dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
+			dispatch = new ModelAndView("../index", "message", "Ingreso incorrecto");
 		}
 
 		return dispatch;
