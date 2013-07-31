@@ -46,7 +46,7 @@
 					</form>
 				</div>
 				
-				<div class="tweets float-left">
+				<div id="listado" class="tweets float-left">
 				<c:choose>
 			        <c:when test="${ not empty listadoTweet}">
 			            <c:forEach var="tweet" items="${listadoTweet}" >

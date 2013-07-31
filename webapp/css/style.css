@@ -183,3 +183,9 @@ body {
 .perfil-data{
 	padding-bottom:10px;
 }
+
+#listado {
+	height: 480px;
+	width:550px;
+	overflow: auto;
+}
