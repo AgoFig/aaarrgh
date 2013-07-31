@@ -50,22 +50,10 @@ public class UsuarioController {
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		List<Usuario> meSiguen = usuarioService.getSeguidores(usuarioSession.getId());//le mando el id del usuario registrado para que traiga seguidores 
-		List<Usuario> estoySiguiendo = usuarioService.getSigue(usuarioSession.getId());
-		
-		
-		
-		String listaSeguidores = "Mis seguidores son:<br />";
+				
+		String listaSeguidores = "<h2>Mis seguidores son:</h2>";
 		for (Usuario usuario : meSiguen) {
-			
-			/* No se esta entrando en este if y no se porque. -Ago */
-		if (estoySiguiendo.contains(usuario)) {
-			listaSeguidores += "<div class='user clear'><span class='float-left'>@" + usuario.getUser()+" "+"</span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'>Dejar de seguir</span></a></div>"; /*Ago*///el getUser contiene los user`s de los seguidores
-			
-		}
-		else {
-			listaSeguidores += "<div class='user clear'><span class='float-left'>@" + usuario.getUser()+" "+"</span><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>"; /*Ago*///el getUser contiene los user`s de los seguidores
-			
-		}
+			listaSeguidores += "<div class='seguidor clear'><span class='float-left'><a href='../usuario/verperfil.do?perfila="+usuario.getUser()+"'>@" + usuario.getUser()+"</a>"+"</span></div>";
 		
 		}
 
@@ -94,7 +82,7 @@ public class UsuarioController {
 
 			List<Usuario> siguiendo = usuarioService.getSigue(usuarioSession
 					.getId());
-			String listaSiguiendo = "Estoy siguiendo a:<br />";
+			String listaSiguiendo = "<h2>Estoy siguiendo a:</h2><br />";
 			for (Usuario sigue : siguiendo) {
 				listaSiguiendo += "<div class='user clear'><span class='float-left'>@" + sigue.getUser()+" </span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>"; /*Ago*/
 			}
@@ -183,9 +171,8 @@ public class UsuarioController {
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		Usuario usuario = usuarioService.getUsuarioByName(perfila);
-		String perfilajeno = "Perfil del usuario seleccionado:<br />";
-		perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
-				+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
+		String perfilajeno = "<h2>Perfil de @" + usuario.getUser()+":</h2>";
+		perfilajeno += "<b>Nombre y Apellido:</b>" + usuario.getFullName()
 				+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />"
 				+"<div class='user clear'><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>";
 
