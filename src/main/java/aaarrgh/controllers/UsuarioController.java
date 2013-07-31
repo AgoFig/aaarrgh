@@ -66,8 +66,8 @@ public class UsuarioController {
 			listaSeguidores += "<div class='user clear'><span class='float-left'>@" + usuario.getUser()+" "+"</span><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>"; /*Ago*///el getUser contiene los user`s de los seguidores
 			
 		}
-		
 		}
+		
 
 		ModelAndView dispatch = null;
 		
@@ -174,24 +174,43 @@ public class UsuarioController {
 	
 	
 	// Mostrar perfil de un unico usuario 
-	@RequestMapping("/verperfil")
-	public ModelAndView mostrarperfil(@RequestParam("perfila") String perfila, HttpServletRequest request)
-			throws PersistenceException {
+		@RequestMapping("/verperfil")
+		public ModelAndView mostrarperfil(@RequestParam("perfila") String perfila, HttpServletRequest request)
+				throws PersistenceException {
 
-		ModelAndView dispatch = null;
-		HttpSession session = request.getSession(true);
-		Usuario usuarioSession = new Usuario();
-		usuarioSession = (Usuario) session.getAttribute("userObject");
-		Usuario usuario = usuarioService.getUsuarioByName(perfila);
-		String perfilajeno = "Perfil del usuario seleccionado:<br />";
-		perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
-				+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
-				+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />"
-				+"<div class='user clear'><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>";
+			ModelAndView dispatch = null;
+			HttpSession session = request.getSession(true);
+			Usuario usuarioSession = new Usuario();
+			usuarioSession = (Usuario) session.getAttribute("userObject");
+			Usuario usuario = usuarioService.getUsuarioByName(perfila);
+			
+		
+			List<Usuario> estoySiguiendo = usuarioService.getSigue(usuarioSession.getId());
+			String perfilajeno = "Perfil del usuario seleccionado:<br />";
+			
+			
+			if (estoySiguiendo.contains(usuario)){ 
+				perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
+					+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
+					+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />"
+					+"<div class='user clear'><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de Seguir</a></div>";
 
-		dispatch = new ModelAndView("ajeno", "ajeno", perfilajeno);
-		return dispatch;
-	}
+			}
+			else 
+			{
+				perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
+						+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
+						+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />"
+						+"<div class='user clear'><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>";
+
+			}
+			
+			
+			dispatch = new ModelAndView("ajeno", "ajeno", perfilajeno);
+			return dispatch;
+		}
+	
+
 	
 //	@RequestMapping("/volverWelcome")
 //	public ModelAndView authenticate(
