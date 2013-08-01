@@ -14,11 +14,17 @@ public class LoginService {
 
 		Usuario correcto = new Usuario();
 		correcto = dao.findByUser(username);
-
-		if (password.equals(correcto.getPassword())) {
-			correcto.setValido(true);
+		if (correcto != null) {
+			if (password.equals(correcto.getPassword())) {
+				correcto.setValido(true);
+			} else {
+				correcto.setValido(false);
+			}
 		} else {
-			correcto.setValido(false);
+
+			Usuario correcto1 = new Usuario();
+			correcto1.setValido(false);
+			correcto = correcto1;
 		}
 
 		return correcto;

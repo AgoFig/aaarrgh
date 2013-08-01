@@ -14,9 +14,9 @@ public class TweetServiceTests {
 
 	@Test
 	public void queTraigaLosImproperios() throws PersistenceException {
-		List<Tweet> improperios = service.getImproperios(1);
+		List<Tweet> improperios = service.getImproperios(11);
 		
-		Assert.assertEquals(0,improperios.size());
+		Assert.assertEquals(14,improperios.size());
 	}
 	
 }

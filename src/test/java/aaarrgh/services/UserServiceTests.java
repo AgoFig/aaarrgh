@@ -13,12 +13,12 @@ public class UserServiceTests {
 	UserService service = new UserService();
 
 	@Test
-	public void queTraigaUsuarioySusSeguidores() throws PersistenceException {
+	public void queTraigaNombreUsuarioYSusSeguidores() throws PersistenceException {
 		Usuario usuario = service.getUsuarioByName("agos");
 		List<Usuario> seguidores =	service.getSeguidores(usuario.getId());
 		
 		Assert.assertEquals("Agostina",usuario.getNombre());
-		Assert.assertEquals(2,seguidores.size());
+		Assert.assertEquals(1,seguidores.size());
 	}
 	
 }

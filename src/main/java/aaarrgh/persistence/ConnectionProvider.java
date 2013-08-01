@@ -9,7 +9,7 @@ public class ConnectionProvider {
 	private static ConnectionProvider instance;
 	private static Connection connection = null;
 
-	private String url = "jdbc:sqlite:C:\\Users\\Paulitta\\workspace\\aaarrgh\\aaarrgh1.db";
+	private String url = "jdbc:sqlite:C:\\Users\\Paulitta\\workspace\\aaarrgh\\aaarrgh.db";
 
 	private ConnectionProvider() throws PersistenceException {
 		try {
@@ -31,7 +31,7 @@ public class ConnectionProvider {
 
 		try {
 			this.closeConnection();
-			// siempre debe ser una nueva conexiÃ³n, por cuestiones de SQLite
+			// siempre debe ser una nueva conexión, por cuestiones de SQLite
 
 			connection = DriverManager.getConnection(this.url);
 			connection.setAutoCommit(false);
