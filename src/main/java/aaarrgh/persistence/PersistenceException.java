@@ -9,8 +9,8 @@ public class PersistenceException extends Exception {
 	}
 
 	public PersistenceException(String msg) {
-        super(msg);
-    }
+		super(msg);
+	}
 
 	public PersistenceException(Exception exception) {
 		super(exception);

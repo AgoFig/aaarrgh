@@ -20,8 +20,8 @@
 					<div class="color blanco"></div>
 				</div>
 				<div class="logo float-left">
-					<a href="../tweet/listar.do">
-						<img alt="logo" src="../img/logo.png">
+					<a href="../tweet/listar.do"> <img alt="logo"
+						src="../img/logo.png">
 					</a>
 				</div>
 				<div class="mini-pirata float-right">
@@ -31,21 +31,23 @@
 			<div class="contenido clear">
 				<div class="barra-postear rojo">
 					<form class="hidden" action="../tweet/postear.do">
-						<input id="postear-twit" type="text" value="Que hay de nuevo marinero?" name="comentario" maxlength="140" /> <input
-							type="submit" class="btn" value="Aaarrgh!"/>
+						<input id="postear-twit" type="text"
+							value="Que hay de nuevo marinero?" name="comentario"
+							maxlength="140" /> <input type="submit" class="btn"
+							value="Aaarrgh!" />
 						<p class="float-right">${message}</p>
 					</form>
 				</div>
 				<div class="tweets float-left">
 					<div class="perfil-data">
-						<label class="label">Nombre: </label> ${usuario.getFullName()} 
+						<label class="label">Nombre: </label> ${usuario.getFullName()}
 					</div>
 					<div class="perfil-data">
-						<label class="label">E-mail: </label> ${usuario.mail} 
+						<label class="label">E-mail: </label> ${usuario.mail}
 					</div>
 				</div>
 				<div class="barra-lateral float-right rojo">
-					
+
 					<div>
 						<a href="../tweet/listar.do">Ver Tweets</a>
 					</div>
@@ -53,16 +55,17 @@
 						<a href="../usuario/siguiendo.do" class="sigo">A quienes sigo</a>
 					</div>
 					<div>
-						<a href="../usuario/seguidores.do" class="seguidores">Mis seguidores</a>
+						<a href="../usuario/seguidores.do" class="seguidores">Mis
+							seguidores</a>
 					</div>
 					<div>
-					<a href="../usuario/ajeno.do" class="ajeno">Usuarios sugeridos</a>
+						<a href="../usuario/ajeno.do" class="ajeno">Usuarios sugeridos</a>
 					</div>
 					<div>
 						<a href="../index.jsp" class="seguidores">Logout</a>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

@@ -137,5 +137,4 @@ public class Usuario {
 		return true;
 	}
 
-	
 }

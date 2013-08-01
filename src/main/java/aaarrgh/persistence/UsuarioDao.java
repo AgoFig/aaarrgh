@@ -6,31 +6,21 @@ import aaarrgh.model.Usuario;
 
 public interface UsuarioDao {
 
-    public void insert(Usuario usuario) throws PersistenceException;
-    
-    public void delete(Usuario usuario) throws PersistenceException;
-    
-//    public void update(Usuario usuario) throws PersistenceException;
-    
-//    public Usuario findById(Integer iduser) throws PersistenceException;
-    
-    public List<Usuario> findAll() throws PersistenceException;
+	public void insert(Usuario usuario) throws PersistenceException;
 
-//	public List<Tweet> traerTweetsDeQuienesSigo(Integer id);
+	public List<Usuario> traerSeguidoresDeUnUsuario(Integer iduser)
+			throws PersistenceException;
 
-    //me tiene que traer los seguidores de un user:
-    public List<Usuario> traerSeguidoresDeUnUsuario(Integer iduser) throws PersistenceException;
-    
-    //me tiene que traer los usuarios que estoy siguiendo:
-    public List <Usuario> traerLosQueEstoySiguiendo(Integer iduser) throws PersistenceException;
-    
+	public List<Usuario> traerLosQueEstoySiguiendo(Integer iduser)
+			throws PersistenceException;
+
 	public Usuario findByUser(String name) throws PersistenceException;
 
 	void seguir(Usuario fan, Usuario idolo) throws PersistenceException;
 
 	void dejarDeSeguir(Usuario fan, Usuario idolo) throws PersistenceException;
-	
-	//perfil ajeno:
-  	public List <Usuario> findByUsuarios(Integer iduser) throws PersistenceException;
-    
+
+	public List<Usuario> findByUsuarios(Integer iduser)
+			throws PersistenceException;
+
 }

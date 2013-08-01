@@ -4,7 +4,7 @@ public class Tweet {
 	private Integer idtweet;
 	private String tweet;
 	private Integer iduser;
-	private String userName; // PAU
+	private String userName;
 
 	public String getUserName() {
 		return userName;
