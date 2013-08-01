@@ -13,7 +13,7 @@
 <!-- jQuery -->
 <link href="../css/blitzer/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 <script src="../js/jquery-1.9.1.js"></script>
-<script src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="../js/jquery-ui-1.10.3.custom.js"></script>
 </head>
 <body>
 	<div id="welcome-wrapper ">
@@ -60,7 +60,9 @@
 				    </c:choose>			
 					
 				</div>
+				<div class="float-left">
 				<div class="lista-feed">${ajeno}</div>
+				</div>
 				<div class="barra-lateral float-right rojo">
 					
 					<div>

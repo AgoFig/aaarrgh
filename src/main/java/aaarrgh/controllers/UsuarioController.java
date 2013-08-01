@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import aaarrgh.model.Usuario;
 import aaarrgh.persistence.PersistenceException;
 import aaarrgh.services.UserService;
@@ -34,7 +33,7 @@ public class UsuarioController {
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		Usuario user = usuarioService
 				.getUsuarioByName(usuarioSession.getUser());
-		
+
 		dispatch = new ModelAndView("perfil", "usuario", user);
 
 		return dispatch;
@@ -46,32 +45,48 @@ public class UsuarioController {
 	@RequestMapping("/seguidores")
 	public ModelAndView mostrarSeguidores(HttpServletRequest request)
 			throws PersistenceException {
-		
+
 		HttpSession session = request.getSession(true);
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
-		List<Usuario> meSiguen = usuarioService.getSeguidores(usuarioSession.getId());//le mando el id del usuario registrado para que traiga seguidores 
-		List<Usuario> estoySiguiendo = usuarioService.getSigue(usuarioSession.getId());
-		
-		
-		
-		String listaSeguidores = "Mis seguidores son:<br />";
+		List<Usuario> meSiguen = usuarioService.getSeguidores(usuarioSession
+				.getId());// le mando el id del usuario registrado para que
+							// traiga seguidores
+		List<Usuario> estoySiguiendo = usuarioService.getSigue(usuarioSession
+				.getId());
+
+		String listaSeguidores = "<h2>Mis seguidores son:</h2>";
 		for (Usuario usuario : meSiguen) {
-			
-			/* No se esta entrando en este if y no se porque. -Ago */
-		if (estoySiguiendo.contains(usuario)) {
-			listaSeguidores += "<div class='user clear'><span class='float-left'>@" + usuario.getUser()+" "+"</span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'>Dejar de seguir</span></a></div>"; /*Ago*///el getUser contiene los user`s de los seguidores
-			
-		}
-		else {
-			listaSeguidores += "<div class='user clear'><span class='float-left'>@" + usuario.getUser()+" "+"</span><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>"; /*Ago*///el getUser contiene los user`s de los seguidores
-			
-		}
-		
+			if (estoySiguiendo.contains(usuario)) {
+				listaSeguidores += "<div class='user clear'><span class='seguidor float-left'>"
+						+ "<a href='../usuario/verperfil.do?perfila="
+						+ usuario.getUser()
+						+ "'>@"
+						+ usuario.getUser()
+						+ "</a>"
+						+ "</span><a href='../usuario/dejardeseguir.do?seguidor="
+						+ usuarioSession.getUser()
+						+ "&seguido="
+						+ usuario.getUser()
+						+ "'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>";
+
+			} else {
+				listaSeguidores += "<div class='user clear'><span class='seguidor float-left'>"
+						+ "<a href='../usuario/verperfil.do?perfila="
+						+ usuario.getUser()
+						+ "'>@"
+						+ usuario.getUser()
+						+ "</a>"
+						+ "</span><a href='../usuario/seguir.do?seguidor="
+						+ usuarioSession.getUser()
+						+ "&seguido="
+						+ usuario.getUser()
+						+ "'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>";
+			}
 		}
 
 		ModelAndView dispatch = null;
-		
+
 		if (meSiguen.isEmpty()) {
 			dispatch = new ModelAndView("seguidores", "seguidores",
 					"No tiene seguidores");
@@ -82,41 +97,78 @@ public class UsuarioController {
 
 		return dispatch;
 	}
+
 	
 	
 	//Obtener a los que esta siguiendo:
-		@RequestMapping("/siguiendo")
-		public ModelAndView mostrarSiguiendo(HttpServletRequest request)
-				throws PersistenceException {
+	@RequestMapping("/siguiendo")
+	public ModelAndView mostrarSiguiendo(HttpServletRequest request)
+			throws PersistenceException {
 
-			HttpSession session = request.getSession(true);
-			Usuario usuarioSession = new Usuario();
-			usuarioSession = (Usuario) session.getAttribute("userObject");
+		HttpSession session = request.getSession(true);
+		Usuario usuarioSession = new Usuario();
+		usuarioSession = (Usuario) session.getAttribute("userObject");
 
-			List<Usuario> siguiendo = usuarioService.getSigue(usuarioSession
-					.getId());
-	
-//			String listaSiguiendo = "Estoy siguiendo a:<br />";
-//			for (Usuario sigue : siguiendo) {
-//				listaSiguiendo += "<div class='user clear'><span class='float-left'>@" + sigue.getUser()+" </span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>"; /*Ago*/
-//			}
+		List<Usuario> siguiendo = usuarioService.getSigue(usuarioSession
+				.getId());
 
-			ModelAndView dispatch = null;
-			if (!siguiendo.isEmpty()) {
-				dispatch = new ModelAndView("siguiendo", "siguiendo",
-						siguiendo);
-				
-			} else {
-				dispatch = new ModelAndView("siguiendo", "mensajeSiguiendo",
-						"No esta siguiendo a nadie");
-			}
+//		String listaSiguiendo = "Estoy siguiendo a:<br />";
+//		for (Usuario sigue : siguiendo) {
+//			listaSiguiendo += "<div class='user clear'><span class='float-left'>@" + sigue.getUser()+" </span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>"; /*Ago*/
+//		}
 
-			return dispatch;
-
+		ModelAndView dispatch = null;
+		if (!siguiendo.isEmpty()) {
+			dispatch = new ModelAndView("siguiendo", "siguiendo",
+					siguiendo);
+			
+		} else {
+			dispatch = new ModelAndView("siguiendo", "mensajeSiguiendo",
+					"No esta siguiendo a nadie");
 		}
 
-		
-//seguir - modificar
+		return dispatch;
+
+	}
+
+
+	// Obtener a los que esta siguiendo:
+//	@RequestMapping("/siguiendo")
+//	public ModelAndView mostrarSiguiendo(HttpServletRequest request)
+//			throws PersistenceException {
+//
+//
+//		HttpSession session = request.getSession(true);
+//		Usuario usuarioSession = new Usuario();
+//		usuarioSession = (Usuario) session.getAttribute("userObject");
+//
+//		List<Usuario> siguiendo = usuarioService.getSigue(usuarioSession
+//				.getId());
+//		String listaSiguiendo = "<h2>Estoy siguiendo a:</h2><br />";
+//		for (Usuario sigue : siguiendo) {
+//			listaSiguiendo += "<div class='user clear'><span class='float-left'>@"
+//					+ sigue.getUser()
+//					+ " </span><a href='../usuario/dejardeseguir.do?seguidor="
+//					+ usuarioSession.getUser()
+//					+ "&seguido="
+//					+ sigue.getUser()
+//					+ "'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>"; /* Ago */
+//		}
+//
+//		ModelAndView dispatch = null;
+//		if (siguiendo.isEmpty()) {
+//			dispatch = new ModelAndView("siguiendo", "siguiendo",
+//					"No esta siguiendo a nadie");
+//		} else {
+//			dispatch = new ModelAndView("siguiendo", "siguiendo",
+//					listaSiguiendo);
+//		}
+//
+//		return dispatch;
+//
+//	}
+
+	// seguir - modificar
 	@RequestMapping("/seguir")
 	public ModelAndView seguir(@RequestParam("seguidor") String seguidor,
 			@RequestParam("seguido") String seguido)
@@ -125,8 +177,8 @@ public class UsuarioController {
 		ModelAndView dispatch = null;
 		Usuario usuarioSeguidor = usuarioService.getUsuarioByName(seguidor);
 		Usuario usuarioSeguido = usuarioService.getUsuarioByName(seguido);
-		
-		usuarioService.seguirUsuario(usuarioSeguidor,usuarioSeguido);
+
+		usuarioService.seguirUsuario(usuarioSeguidor, usuarioSeguido);
 
 		dispatch = new ModelAndView("siguiendo", "mensajeSiguiendo",
 				"Ahora esta siguiendo a " + seguido);
@@ -150,7 +202,7 @@ public class UsuarioController {
 		return dispatch;
 	}
 
-	//perfil ajeno - cecilia
+	// perfil ajeno - cecilia
 	@RequestMapping("/ajeno")
 	public ModelAndView perfilAjeno(HttpServletRequest request)
 			throws PersistenceException {
@@ -190,8 +242,8 @@ public class UsuarioController {
 		return dispatch;
 	}
 	
-	
-	// Mostrar perfil de un unico usuario 
+
+	// Mostrar perfil de un unico usuario
 	@RequestMapping("/verperfil")
 	public ModelAndView mostrarperfil(@RequestParam("perfila") String perfila, HttpServletRequest request)
 			throws PersistenceException {
@@ -201,34 +253,53 @@ public class UsuarioController {
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
 		Usuario usuario = usuarioService.getUsuarioByName(perfila);
+
+
+		List<Usuario> estoySiguiendo = usuarioService.getSigue(usuarioSession.getId());
 		String perfilajeno = "Perfil del usuario seleccionado:<br />";
-		perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
+
+
+		if (estoySiguiendo.contains(usuario)){ 
+			perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
 				+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
 				+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />"
-				+"<div class='user clear'><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>";
+				+"<div class='user clear'><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de Seguir</a></div>";
+
+		}
+		else 
+		{
+			perfilajeno = "<br />" + "<b>Nombre de usuario:</b>" + "@" + usuario.getUser()
+					+ "<br /><br/>" + "<b>Nombre y Apellido:</b>" + usuario.getFullName()
+					+ " <br /><br/> " + "<b>E-Mail:</b>" + usuario.getMail() + "<br />"
+					+"<div class='user clear'><a href='../usuario/seguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+usuario.getUser()+"'><span class='ui-icon ui-icon-plusthick float-left'></span>Seguir</a></div>";
+
+		}
+
 
 		dispatch = new ModelAndView("ajeno", "ajeno", perfilajeno);
 		return dispatch;
 	}
-	
-//	@RequestMapping("/volverWelcome")
-//	public ModelAndView authenticate(
-//		HttpServletRequest request) throws PersistenceException {
-//			
-//	ModelAndView dispatch = null;
-//	HttpSession session = request.getSession(true);
-//	
-//	if (usuario.getValido()) {
-//		
-//		Usuario usuarioSession = new Usuario();
-//		usuarioSession = (Usuario) session.getAttribute("userObject");
-//		dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" + usuarioSession.getUser()); 
-//	} else {
-//		dispatch = new ModelAndView("../../index", "message", "Ingreso incorrecto");
-//	}
-//
-//	return dispatch;
-//
-//}
-	
+
+	// @RequestMapping("/volverWelcome")
+	// public ModelAndView authenticate(
+	// HttpServletRequest request) throws PersistenceException {
+	//
+	// ModelAndView dispatch = null;
+	// HttpSession session = request.getSession(true);
+	//
+	// if (usuario.getValido()) {
+	//
+	// Usuario usuarioSession = new Usuario();
+	// usuarioSession = (Usuario) session.getAttribute("userObject");
+	// dispatch = new ModelAndView("welcome", "message", "Bienvenido, @" +
+	// usuarioSession.getUser());
+	// } else {
+	// dispatch = new ModelAndView("../../index", "message",
+	// "Ingreso incorrecto");
+	// }
+	//
+	// return dispatch;
+	//
+	// }
+
 }
