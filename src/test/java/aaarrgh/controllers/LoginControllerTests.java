@@ -20,18 +20,18 @@ public class LoginControllerTests {
 	@Test
 	public void authTest() throws Exception {
 
-		LoginController controller = new LoginController();
-		//ModelAndView modelAndView = controller.authenticate("jack", "jack");
+		//LoginController controller = new LoginController();
+		//ModelAndView modelAndView = controller.authenticate("agos", "13245");
 
-//		Assert.assertEquals("welcome", modelAndView.getViewName());
-//		Assert.assertEquals("Bienvenido, @jack", modelAndView.getModel().get("message"));
+		//Assert.assertEquals("welcome", modelAndView.getViewName());
+		//Assert.assertEquals("Bienvenido, @agos", modelAndView.getModel().get("message"));
 
 	}
 	
 	@Test
 	public void authRefusedTest() throws Exception {
 
-		LoginController controller = new LoginController();
+		//LoginController controller = new LoginController();
 //		ModelAndView modelAndView = controller.authenticate("jack", "jacko");
 //
 //		Assert.assertEquals("../../index", modelAndView.getViewName());
