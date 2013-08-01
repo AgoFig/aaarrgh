@@ -1,5 +1,6 @@
 package aaarrgh.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,18 +95,20 @@ public class UsuarioController {
 
 			List<Usuario> siguiendo = usuarioService.getSigue(usuarioSession
 					.getId());
-			String listaSiguiendo = "Estoy siguiendo a:<br />";
-			for (Usuario sigue : siguiendo) {
-				listaSiguiendo += "<div class='user clear'><span class='float-left'>@" + sigue.getUser()+" </span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>"; /*Ago*/
-			}
+	
+//			String listaSiguiendo = "Estoy siguiendo a:<br />";
+//			for (Usuario sigue : siguiendo) {
+//				listaSiguiendo += "<div class='user clear'><span class='float-left'>@" + sigue.getUser()+" </span><a href='../usuario/dejardeseguir.do?seguidor="+usuarioSession.getUser()+"&seguido="+sigue.getUser()+"'><span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a></div>"; /*Ago*/
+//			}
 
 			ModelAndView dispatch = null;
-			if (siguiendo.isEmpty()) {
+			if (!siguiendo.isEmpty()) {
 				dispatch = new ModelAndView("siguiendo", "siguiendo",
-						"No esta siguiendo a nadie");
+						siguiendo);
+				
 			} else {
-				dispatch = new ModelAndView("siguiendo", "siguiendo",
-						listaSiguiendo);
+				dispatch = new ModelAndView("siguiendo", "mensajeSiguiendo",
+						"No esta siguiendo a nadie");
 			}
 
 			return dispatch;
@@ -156,18 +159,33 @@ public class UsuarioController {
 		HttpSession session = request.getSession(true);
 		Usuario usuarioSession = new Usuario();
 		usuarioSession = (Usuario) session.getAttribute("userObject");
-		List<Usuario> similares = usuarioService.getSimilares(usuarioSession.getId());
-		String listaSimilares = "<h2>Usuarios que podr&iacute;as seguir:</h2>";
-		for (Usuario similar : similares) {
+		
+		List<Usuario> sugeridos = usuarioService.getSimilares(usuarioSession.getId());
+		
+		List<Usuario> siguiendo = usuarioService.getSigue(usuarioSession.getId());
+		
+		List<Usuario> listPuedoSeguir = new ArrayList<Usuario>();
+		
+		for (Usuario usuario : sugeridos) {
 			
-			listaSimilares +="<div class='user clear'><span class='float-left'> @" + similar.getUser()+" "+"</span><a href='../usuario/verperfil.do?perfila="+similar.getUser()+"'><span class='ui-icon ui-icon-person float-left'></span>Ver perfil</a></div>"+ "<br />"; 
-			}
-		if (similares.isEmpty()) {
-			dispatch = new ModelAndView("ajeno", "ajeno",
-					"No hay usuarios registrados");
+			if (!siguiendo.contains(usuario)) {
+					
+				listPuedoSeguir.add(usuario);
+				}
+		}
+		
+		
+//		String listaSimilares = "<h2>Usuarios que podr&iacute;as seguir:</h2>";
+//		for (Usuario similar : sugeridos) {
+//			
+//			listaSimilares +="<div class='user clear'><span class='float-left'> @" + similar.getUser()+" "+"</span><a href='../usuario/verperfil.do?perfila="+similar.getUser()+"'><span class='ui-icon ui-icon-person float-left'></span>Ver perfil</a></div>"+ "<br />"; 
+//			}
+		if (listPuedoSeguir.isEmpty()) {
+			dispatch = new ModelAndView("ajeno", "mensajeSugeridos",
+					"No hay usuarios sugeridos");
 		} else {
-			dispatch = new ModelAndView("ajeno", "ajeno",
-					listaSimilares);
+			dispatch = new ModelAndView("ajeno", "listPuedoSeguir",
+					listPuedoSeguir);
 		}
 		return dispatch;
 	}

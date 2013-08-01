@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="aaarrgh.model.Usuario"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Arrays"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,11 +28,7 @@
 					<div class="color blanco"></div>
 				</div>
 				<div class="logo float-left">
-					<a href="../login/auth.do?user=<% 					    
-
-					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass"));
-					    
-					    %>"><img alt="logo" src="../img/logo.png"></a>
+					<a href="../tweet/listar.do>"><img alt="logo" src="../img/logo.png"></a>
 				</div>
 				<div class="mini-pirata float-right">
 					<img alt="mini pirata" src="../img/mini-pirata.png">
@@ -43,16 +43,38 @@
 					</form>
 				</div>
 				<div class="tweets float-left">
-					<div class="lista-feed">${mensaje} ${mensajeSiguiendo} ${siguiendo}</div>
+					<% Usuario user =  (Usuario) session.getAttribute("userObject"); %>
+					<div class="lista-feed">${mensaje} </div>
+					<c:choose>
+				        <c:when test="${ not empty siguiendo}">
+				        	<h2>Estoy siguiendo a:</h2>
+				            <c:forEach var="siguiendo" items="${siguiendo}" >
+								<div class="user clear">
+									<span class="float-left">@ ${siguiendo.user}</span>
+									<a href="../usuario/dejardeseguir.do?seguidor=<%= user.getUser()%>&seguido=${siguiendo.user}">
+									<span class='ui-icon ui-icon-minusthick float-left'></span>Dejar de seguir</a>
+	      					 	</div>
+	      					 	<div class="user clear">
+									<a href="../usuario/verperfil.do?perfila=${siguiendo.user}">
+									<span class='ui-icon ui-icon-person float-left'></span>Ver perfil</a>
+	      					 	</div> 
+	      					 	
+							</c:forEach>
+				        </c:when>
+				        <c:otherwise>
+				        <c:if test="${not empty mensajeSugeridos}">
+				        	 <p class="float-left">${mensajeSugeridos}</p>
+				        </c:if>
+				           <c:if test="${not empty mensajeSiguiendo}">
+				        	 <p class="float-left">${mensajeSiguiendo}</p>
+				        </c:if>  
+				        </c:otherwise>
+				    </c:choose>
 				</div>
 				<div class="barra-lateral float-right rojo">
 					
 					<div>
-						<a href="../login/auth.do?user=<% 					    
-
-					    		 out.print(session.getAttribute("user")+"&password="+session.getAttribute("pass"));
-					    
-					    %>" class="miperfil">Ver Tweets</a>
+						<a href="../tweet/listar.do" class="miperfil">Ver Tweets</a>
 					</div>
 					<div>
 						<a href="../usuario/perfil.do" class="miperfil">Mi Perfil</a>

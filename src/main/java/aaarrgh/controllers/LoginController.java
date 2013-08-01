@@ -62,6 +62,7 @@ public class LoginController extends HttpServlet {
 		return dispatch;
 
 	}
+		
 
 	public ModelAndView logout() {
 		ModelAndView dispatch = null;
