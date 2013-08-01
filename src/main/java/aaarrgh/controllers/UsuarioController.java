@@ -209,14 +209,14 @@ public class UsuarioController {
 
 		if (estoySiguiendo.contains(usuario)) {
 			perfilajeno = "<br />"
-					+ "<b>Nombre de usuario:</b>"
+					+ "<b>Nombre de usuario: </b>"
 					+ "@"
 					+ usuario.getUser()
 					+ "<br /><br/>"
-					+ "<b>Nombre y Apellido:</b>"
+					+ "<b>Nombre y Apellido: </b>"
 					+ usuario.getFullName()
 					+ " <br /><br/> "
-					+ "<b>E-Mail:</b>"
+					+ "<b>E-Mail: </b>"
 					+ usuario.getMail()
 					+ "<br />"
 					+ "<div class='user clear'><a href='../usuario/dejardeseguir.do?seguidor="
@@ -227,14 +227,14 @@ public class UsuarioController {
 
 		} else {
 			perfilajeno = "<br />"
-					+ "<b>Nombre de usuario:</b>"
+					+ "<b>Nombre de usuario: </b>"
 					+ "@"
 					+ usuario.getUser()
 					+ "<br /><br/>"
-					+ "<b>Nombre y Apellido:</b>"
+					+ "<b>Nombre y Apellido: </b>"
 					+ usuario.getFullName()
 					+ " <br /><br/> "
-					+ "<b>E-Mail:</b>"
+					+ "<b>E-Mail: </b>"
 					+ usuario.getMail()
 					+ "<br />"
 					+ "<div class='user clear'><a href='../usuario/seguir.do?seguidor="

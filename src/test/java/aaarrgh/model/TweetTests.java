@@ -14,10 +14,14 @@ public class TweetTests {
 	public void getCantidadTweetsForUser() throws PersistenceException {
 
 		UserService miUsuarioService = UserService.getInstance();
-		Usuario miUsuario = miUsuarioService.getUsuarioByName("paulitta");
-		TweetService miTweet = TweetService.getInstance();		
-		
-		Assert.assertEquals(16, miTweet.getCantidadImproperios(miUsuario));
+		Usuario miUsuario = miUsuarioService.getUsuarioByName("jacksparrow");
+		TweetService miTweet = TweetService.getInstance();
+
+		Assert.assertEquals(0, miTweet.getCantidadImproperios(miUsuario));// mientras
+																			// jack
+																			// no
+																			// escriba
+																			// nada
 
 	}
 

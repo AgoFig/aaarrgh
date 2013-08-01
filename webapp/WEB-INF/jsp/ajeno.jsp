@@ -44,10 +44,11 @@
 						<p class="float-right">${message}</p>
 					</form>
 				</div>
-				<div class="tweets float-left">
 
-					<c:choose>
-						<c:when test="${ not empty listPuedoSeguir}">
+
+				<c:choose>
+					<c:when test="${ not empty listPuedoSeguir}">
+						<div class="tweets float-left">
 							<h2>Usuarios que podr&iacute;as seguir:</h2>
 							<c:forEach var="puedoSeguir" items="${listPuedoSeguir}">
 								<div class="user clear">
@@ -58,13 +59,14 @@
 									</a>
 								</div>
 							</c:forEach>
-						</c:when>
-						<c:otherwise>
-							<p class="float-left">${mensajeSugeridos}</p>
-						</c:otherwise>
-					</c:choose>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<p class="float-left">${mensajeSugeridos}</p>
+					</c:otherwise>
+				</c:choose>
 
-				</div>
+
 				<div class="float-left">
 					<div class="lista-feed">${ajeno}</div>
 				</div>
@@ -93,5 +95,6 @@
 
 			</div>
 		</div>
+	</div>
 </body>
 </html>

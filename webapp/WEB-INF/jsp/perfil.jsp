@@ -40,7 +40,7 @@
 				</div>
 				<div class="tweets float-left">
 					<div class="perfil-data">
-						<label class="label">Nombre: </label> ${usuario.getFullName()}
+						<label class="label">Nombre y Apellido: </label> ${usuario.getFullName()}
 					</div>
 					<div class="perfil-data">
 						<label class="label">E-mail: </label> ${usuario.mail}
